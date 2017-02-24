@@ -6,8 +6,8 @@
 	"7 Mar 2014
 	set hidden
 "Load files
-source $HOME/.vim/setup/uniterc.vim
-
+	source $HOME/.vim/setup/uniterc.vim
+	"
 "Remaps
 	" 26_06_2015
 	" http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
@@ -17,7 +17,7 @@ source $HOME/.vim/setup/uniterc.vim
 	let mapleader = "\<space>"
 	" Shortcut to rapidly toggle `set list`
 	nmap <leader>l :set list!<CR>
-	"5 Mar 2014 also in iTerm set S Space to hex 0x15 for <C-u> to work  
+	"5 Mar 2014 also in iTerm set S Space to hex 0x15 for <C-u> to work
 	"http://stackoverflow.com/questions/279959/how-can-i-make-shiftspacebar-page-up-in-vim
 	"nnoremap <Space> <C-f>
 	"nnoremap <S-Space> <C-b>
@@ -330,23 +330,23 @@ source $HOME/.vim/setup/uniterc.vim
 	" 22_Dec_14 
 	" installed https://github.com/kien/rainbow_parentheses.vim
 	let g:rbpt_colorpairs = [
-	    \ ['brown',       'RoyalBlue3'],
-	    \ ['Darkblue',    'SeaGreen3'],
-	    \ ['darkgray',    'DarkOrchid3'],
-	    \ ['darkgreen',   'firebrick3'],
-	    \ ['darkcyan',    'RoyalBlue3'],
-	    \ ['darkred',     'SeaGreen3'],
-	    \ ['darkmagenta', 'DarkOrchid3'],
-	    \ ['brown',       'firebrick3'],
-	    \ ['gray',        'RoyalBlue3'],
-	    \ ['black',       'SeaGreen3'],
-	    \ ['darkmagenta', 'DarkOrchid3'],
-	    \ ['Darkblue',    'firebrick3'],
-	    \ ['darkgreen',   'RoyalBlue3'],
-	    \ ['darkcyan',    'SeaGreen3'],
-	    \ ['darkred',     'DarkOrchid3'],
-	    \ ['red',         'firebrick3'],
-	    \ ]
+	\ ['brown',       'RoyalBlue3'],
+	\ ['Darkblue',    'SeaGreen3'],
+	\ ['darkgray',    'DarkOrchid3'],
+	\ ['darkgreen',   'firebrick3'],
+	\ ['darkcyan',    'RoyalBlue3'],
+	\ ['darkred',     'SeaGreen3'],
+	\ ['darkmagenta', 'DarkOrchid3'],
+	\ ['brown',       'firebrick3'],
+	\ ['gray',        'RoyalBlue3'],
+	\ ['black',       'SeaGreen3'],
+	\ ['darkmagenta', 'DarkOrchid3'],
+	\ ['Darkblue',    'firebrick3'],
+	\ ['darkgreen',   'RoyalBlue3'],
+	\ ['darkcyan',    'SeaGreen3'],
+	\ ['darkred',     'DarkOrchid3'],
+	\ ['red',         'firebrick3'],
+	\ ]
 	let g:rbpt_max = 16
 	let g:rbpt_loadcmd_toggle = 0
 	"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -364,9 +364,9 @@ source $HOME/.vim/setup/uniterc.vim
 	" if !exists('g:airline_symbols')
 	" 	let g:airline_symbols = {}
 	" endif
-	 let g:airline_left_sep = ''
-	 let g:airline_left_alt_sep = ''
-	 let g:airline_right_sep = ''
+	let g:airline_left_sep = ''
+	let g:airline_left_alt_sep = ''
+	let g:airline_right_sep = ''
 	" let g:airline_right_alt_sep = '⮃'
 	" let g:airline_symbols.branch = ''
 	" let g:airline_symbols.readonly = 'RO'
@@ -462,22 +462,21 @@ source $HOME/.vim/setup/uniterc.vim
 	"\ '' : 'S-B',
 	"\ }
 	""}}}
-
 "Tmux-line {{{
-    " \'z'    : '#H'}
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'y'    : ['%R', '%a', '%Y'],
-      \'z'    : '#H'}
+	" \'z'    : '#H'}
+	let g:tmuxline_preset = {
+	\'a'    : '#S',
+	\'win'  : ['#I', '#W'],
+	\'cwin' : ['#I', '#W', '#F'],
+	\'y'    : ['%R', '%a', '%Y'],
+	\'z'    : '#H'}
 	""}}}
-let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '',
-    \ 'right' : '',
-    \ 'right_alt' : '',
-    \ 'space' : ' '}
+	let g:tmuxline_separators = {
+	\ 'left' : '',
+	\ 'left_alt': '',
+	\ 'right' : '',
+	\ 'right_alt' : '',
+	\ 'space' : ' '}
 "Mode aware cursor {{{
 	"" https://github.com/blaenk/dots/blob/9843177fa6155e843eb9e84225f458cd0205c969/vim/vimrc.ln#L49-L64
 	"" 23_Dec_14
@@ -519,261 +518,246 @@ let g:tmuxline_separators = {
 	au BufRead,BufNewFile *vimperator* setfiletype vimperator
 "Folding
 	"http://vim.wikia.com/wiki/Folding
-	"26_06_2015 
+	"26_06_2015
 	augroup vimrc
 	au BufReadPre * setlocal foldmethod=indent
 	au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 	augroup END
 "Cyrillic
-"http://habrahabr.ru/post/98393/ 09_09_2015
+	:"http://habrahabr.ru/post/98393/ 09_09_2015
 	set keymap=russian-jcukenwin
 	set iminsert=0
 	set imsearch=0
 	highlight lCursor guifg=NONE guibg=Cyan
 "Spelling
-" http://habrahabr.ru/post/98393/ 09_09_2015
-  	" :setlocal spell spelllang=ru_yo,en_us
-"Diminactive - reduce brightness of inactive window
-let g:diminactive_enable_focus = 1
-" let g:diminactive_use_syntax = 1
-"
-
- " 14_01_2016
- "http://www.everythingcli.org/use-ranger-as-a-file-explorer-in-vim/
-function RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map <Leader>x :call RangerExplorer()<CR>
-
+	" http://habrahabr.ru/post/98393/ 09_09_2015
+	" :setlocal spell spelllang=ru_yo,en_us
+	"Diminactive - reduce brightness of inactive window
+	let g:diminactive_enable_focus = 1
+	" let g:diminactive_use_syntax = 1
+"Ranger
+	" 14_01_2016
+	"http://www.everythingcli.org/use-ranger-as-a-file-explorer-in-vim/
+	function RangerExplorer()
+	exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+	if filereadable('/tmp/vim_ranger_current_file')
+		exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+		call system('rm /tmp/vim_ranger_current_file')
+	endif
+	redraw!
+	endfun
+	
+	map <Leader>x :call RangerExplorer()<CR>
 "Matchit
-" let b:match_words = '<:>,<tag>:</tag>'
-let b:match_words = '\<if\>:\<endif\>,\<tag\>:\</tag\>'
-" let b:match_words = &matchpairs
-set mps+=<:>
-runtime macros/matchit.vim
-
+	" let b:match_words = '<:>,<tag>:</tag>'
+	let b:match_words = '\<if\>:\<endif\>,\<tag\>:\</tag\>'
+	" let b:match_words = &matchpairs
+	set mps+=<:>
+	runtime macros/matchit.vim
 "Nugget
-"http://www.oschrenk.com/vim-nuggets/
-"jump to last cursor position when opening a file
-"dont do it when writing a commit log entry
-autocmd BufReadPost * call SetCursorPosition()
-function! SetCursorPosition()
-    if &filetype !~ 'svn\|commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
-endfunction
-
-"Nugget
+	"http://www.oschrenk.com/vim-nuggets/
+	"jump to last cursor position when opening a file
+	"dont do it when writing a commit log entry
+	autocmd BufReadPost * call SetCursorPosition()
+	function! SetCursorPosition()
+	if &filetype !~ 'svn\|commit\c'
+		if line("'\"") > 0 && line("'\"") <= line("$")
+		exe "normal! g`\""
+		normal! zz
+		endif
+	end
+	endfunction
 "Persistent undo
-" Keep undo history across sessions
-" see :help undo-persistence
-if exists("+undofile")
-  " create dir if it doesn't exist
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-  " if path ends in two slashes, file name will use complete path
-  " :help dir
-  set undodir=~/.vim/undo//
-  set undofile
-  set undolevels=500
-  set undoreload=500
-endif
-
-"===============================================================================
-" 02_03_2016
-"https://github.com/unr/dotfiles/blob/master/vim/vim.symlink/plugin/unite.vim
-"
-"https://github.com/OliverUv/Configuration-files/blob/master/vimrc#L305
-"https://www.reddit.com/r/vim/comments/2g791z/anyone_have_any_unitevim_vimrc_snippets_to_share/
-" Unite {{{ "
-" Fuzzy match by default
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-
-" Fuzzy matching for plugins not using matcher_default as filter
-call unite#custom#source('outline,line,grep,session', 'matchers', ['matcher_fuzzy'])
-
-" Ignore some things
-" KEEP THESE IN SYNC WITH WILDIGNORE!
-" Need to escape dots in the patterns!
-call unite#custom#source('file_rec,file_rec/async,file_mru,file,grep',
-            \ 'ignore_pattern', join([
-            \ '\.swp', '\.swo', '\~$',
-            \ '\.git/', '\.svn/', '\.hg/',
-            \ '^tags$', '\.taghl$',
-            \ '\.ropeproject/', '\.pbxproj$', '\.xcodeproj', '\.vcproj',
-            \ 'node_modules/', 'bower_components/', 'log/', 'tmp/', 'obj/',
-            \ '/vendor/gems/', '/vendor/cache/', '\.bundle/', '\.sass-cache/',
-            \ '/tmp/cache/assets/.*/sprockets/', '/tmp/cache/assets/.*/sass/',
-            \ 'thirdparty/', 'Debug/', 'Release/', 'build/', 'dist/',
-            \ 'web/static/components/', 'web/static/external/', 'web/static/images/',
-            \ '\.pyc$', 'pb2\.py$', '\.class$', '\.jar$', '\.min\.js$',
-            \ '\.jpg$', '\.jpeg$', '\.bmp$', '\.png$', '\.gif$',
-            \ '\.o$', '\.out$', '\.obj$', '\.rbc$', '\.rbo$', '\.gem$',
-            \ '\.zip$', '\.tar\.gz$', '\.tar\.bz2$', '\.rar$', '\.tar\.xz$'
-            \ ], '\|'))
-
-" call unite#custom#source('file_rec,file_rec/async,file_mru,file,grep', 'ignore_globs',
-    " \ split(&wildignore, ','))
-
-let g:unite_source_rec_max_cache_files = 0
-call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-            \ 'max_candidates', 0)
-
-" Keep track of yanks
-let g:unite_source_history_yank_enable = 1
-" Prettier prompt
-call unite#custom#profile('default', 'context', {
-    \   'prompt': '» ',
-    \   'start_insert': 1,
-    \   'update_time': 200,
-    \   'cursor_line_highlight': 'UniteSelectedLine',
-    \   'direction': 'botright',
-    \   'prompt_direction': 'top',
-    \ })
-" Autosave sessions for unite-sessions
-let g:unite_source_session_enable_auto_save = 1
-" Non-ugly colors for selected item, requires you to set 'hi UnitedSelectedLine'
-let g:unite_cursor_line_highlight = "UniteSelectedLine"
-" Set to some better time formats
-let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
-let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
-
-" Use ag or ack as grep command if possible
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-case --ignore tags'
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts =
-              \ '--no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-function! g:DoUniteFuzzy()
-    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_rank')
-    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
-    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_fuzzy')
-    exec "Unite -buffer-name=files file_rec/async file/new"
-endfunction
-function! g:DoUniteNonFuzzy()
-    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_nothing')
-    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
-    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_glob')
-    exec "Unite -buffer-name=files file_rec/async file/new"
-endfunction
-function! g:DoUniteFuzzyQuickfix()
-    call unite#custom#source('quickfix', 'sorters', 'sorter_rank')
-    call unite#custom#source('quickfix', 'matchers', 'matcher_fuzzy')
-    exec "Unite -buffer-name=quickfix quickfix"
-endfunction
-function! g:DoUniteNonFuzzyQuickfix()
-    call unite#custom#source('quickfix', 'sorters', 'sorter_nothing')
-    call unite#custom#source('quickfix', 'matchers', 'matcher_glob')
-    exec "Unite -buffer-name=quickfix quickfix"
-endfunction
-function! UltiSnipsCallUnite()
-    Unite -immediately -no-empty -vertical -buffer-name=ultisnips ultisnips
-    return ''
-endfunction
-
-" Bindings
-inoremap <silent><leader>l<tab> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent><leader>l<tab> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent><leader>lr :call g:DoUniteFuzzy()<CR>
-nnoremap <silent><leader>lR :call g:DoUniteNonFuzzy()<CR>
-nnoremap <silent><leader>lq :call g:DoUniteFuzzyQuickfix()<CR>
-nnoremap <silent><leader>lQ :call g:DoUniteNonFuzzyQuickfix()<CR>
-nnoremap <silent><leader>le :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent><leader>lE :<C-u>Unite -buffer-name=files file_mru bookmark file_rec/async file/new<CR>
-nnoremap <silent><leader>lB :<C-u>Unite -buffer-name=buffers buffer<CR>
-nnoremap <silent><leader>lb :<C-u>Unite -buffer-name=buffers buffer_tab<CR>
-nnoremap <silent><leader>ly :<C-u>Unite -buffer-name=yanks history/yank<CR>
-nnoremap <silent><leader>lc :<C-u>Unite -buffer-name=changes change<CR>
-nnoremap <silent><leader>lj :<C-u>Unite -buffer-name=jumps jump<CR>
-nnoremap <silent><leader>lf :<C-u>Unite -buffer-name=jumps jump<CR>
-nnoremap <silent><leader>l; :<C-u>Unite -buffer-name=commands history/command<CR>
-nnoremap <silent><leader>l/ :<C-u>Unite -buffer-name=commands history/search<CR>
-nnoremap <silent><leader>lo :<C-u>Unite -buffer-name=outline outline<CR>
-nnoremap <silent><leader>la :<C-u>Unite -buffer-name=outline -vertical outline<CR>
-nnoremap <silent><leader>ll :<C-u>Unite -buffer-name=line line<CR>
-nnoremap <silent><leader>lw :<C-u>Unite -buffer-name=location_list location_list<CR>
-nnoremap <silent><leader>l* :<C-u>UniteWithCursorWord -buffer-name=line line<CR>
-nnoremap <silent><leader>lg :<C-u>Unite -buffer-name=grep grep<CR>
-nnoremap <silent><leader>lG "zyiw:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
-vnoremap <silent><leader>lG "zy:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
-nnoremap <silent><leader>ls :<C-u>Unite session<CR>
-nnoremap <silent><leader>lt :<C-u>Unite -buffer-name=tags tag<CR>
-nnoremap <silent><leader>lT :<C-u>Unite -buffer-name=tagfiles tag/file<CR>
-nnoremap <silent><leader>li :<C-u>Unite -buffer-name=autotags tag/include<CR>
-nnoremap <silent><leader>ld :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru directory<CR>
-nnoremap <silent><leader>l, :<C-u>UniteResume<CR>
-nnoremap <silent><leader>lv :<C-u>UniteResume<CR>
-nnoremap <silent><leader>lV :<C-u>UniteResume
-
-nnoremap <leader>lS :<C-u>UniteSessionSave
-
-function! s:unite_my_settings()
-  "Don't add parens to my filters
-  let b:delimitMate_autoclose = 0
-
-  "Keymaps inside the unite split
-  nmap <buffer> <nowait> <leader>d <Plug>(unite_exit)
-  nmap <buffer> <nowait> <C-c> <Plug>(unite_exit)
-  imap <buffer> <nowait> <C-c> <Plug>(unite_exit)
-
-  nnoremap <buffer> <C-n> <Plug>(unite_select_next_line)
-  nnoremap <buffer> <C-p> <Plug>(unite_select_previous_line)
-
-  nnoremap <buffer> <Up> 3<c-y>
-  nnoremap <buffer> <Down> 3<c-e>
-  inoremap <buffer> <Up> <esc>3<c-y>
-  inoremap <buffer> <Down> <esc>3<c-e>
-
-  inoremap <silent><buffer><expr> <C-j> unite#do_action('split')
-  nnoremap <silent><buffer><expr> <C-j> unite#do_action('split')
-  inoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
-  nnoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
-endfunction
-
-if has("autocmd")
-augroup UniteSettingsGroup
-    " Clear autocmds for this group
-    autocmd!
-    autocmd FileType unite call s:unite_my_settings()
-augroup end
-endif
-
+	" Keep undo history across sessions
+	" see :help undo-persistence
+	if exists("+undofile")
+	" create dir if it doesn't exist
+	if isdirectory($HOME . '/.vim/undo') == 0
+	:silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+	endif
+	" if path ends in two slashes, file name will use complete path
+	" :help dir
+	set undodir=~/.vim/undo//
+	set undofile
+	set undolevels=500
+	set undoreload=500
+	endif
+"Unite {{{ "
+	" 02_03_2016
+	"https://github.com/unr/dotfiles/blob/master/vim/vim.symlink/plugin/unite.vim
+	"https://github.com/OliverUv/Configuration-files/blob/master/vimrc#L305
+	"https://www.reddit.com/r/vim/comments/2g791z/anyone_have_any_unitevim_vimrc_snippets_to_share/
+	" Fuzzy match by default
+	call unite#filters#matcher_default#use(['matcher_fuzzy'])
+	call unite#filters#sorter_default#use(['sorter_rank'])
+	
+	" Fuzzy matching for plugins not using matcher_default as filter
+	call unite#custom#source('outline,line,grep,session', 'matchers', ['matcher_fuzzy'])
+	
+	" Ignore some things
+	" KEEP THESE IN SYNC WITH WILDIGNORE!
+	" Need to escape dots in the patterns!
+	call unite#custom#source('file_rec,file_rec/async,file_mru,file,grep',
+	\ 'ignore_pattern', join([
+	\ '\.swp', '\.swo', '\~$',
+	\ '\.git/', '\.svn/', '\.hg/',
+	\ '^tags$', '\.taghl$',
+	\ '\.ropeproject/', '\.pbxproj$', '\.xcodeproj', '\.vcproj',
+	\ 'node_modules/', 'bower_components/', 'log/', 'tmp/', 'obj/',
+	\ '/vendor/gems/', '/vendor/cache/', '\.bundle/', '\.sass-cache/',
+	\ '/tmp/cache/assets/.*/sprockets/', '/tmp/cache/assets/.*/sass/',
+	\ 'thirdparty/', 'Debug/', 'Release/', 'build/', 'dist/',
+	\ 'web/static/components/', 'web/static/external/', 'web/static/images/',
+	\ '\.pyc$', 'pb2\.py$', '\.class$', '\.jar$', '\.min\.js$',
+	\ '\.jpg$', '\.jpeg$', '\.bmp$', '\.png$', '\.gif$',
+	\ '\.o$', '\.out$', '\.obj$', '\.rbc$', '\.rbo$', '\.gem$',
+	\ '\.zip$', '\.tar\.gz$', '\.tar\.bz2$', '\.rar$', '\.tar\.xz$'
+	\ ], '\|'))
+	
+	" call unite#custom#source('file_rec,file_rec/async,file_mru,file,grep', 'ignore_globs',
+	" \ split(&wildignore, ','))
+	
+	let g:unite_source_rec_max_cache_files = 0
+	call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+	\ 'max_candidates', 0)
+	
+	" Keep track of yanks
+	let g:unite_source_history_yank_enable = 1
+	" Prettier prompt
+	call unite#custom#profile('default', 'context', {
+	\   'prompt': '» ',
+	\   'start_insert': 1,
+	\   'update_time': 200,
+	\   'cursor_line_highlight': 'UniteSelectedLine',
+	\   'direction': 'botright',
+	\   'prompt_direction': 'top',
+	\ })
+	" Autosave sessions for unite-sessions
+	let g:unite_source_session_enable_auto_save = 1
+	" Non-ugly colors for selected item, requires you to set 'hi UnitedSelectedLine'
+	let g:unite_cursor_line_highlight = "UniteSelectedLine"
+	" Set to some better time formats
+	let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
+	let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
+	
+	" Use ag or ack as grep command if possible
+	if executable('ag')
+		let g:unite_source_grep_command = 'ag'
+		let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-case --ignore tags'
+		let g:unite_source_grep_recursive_opt = ''
+	elseif executable('ack-grep')
+		let g:unite_source_grep_command = 'ack-grep'
+		let g:unite_source_grep_default_opts =
+		\ '--no-heading --no-color -a -H'
+		let g:unite_source_grep_recursive_opt = ''
+	endif
+	
+	function! g:DoUniteFuzzy()
+		call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_rank')
+		call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+		call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_fuzzy')
+		exec "Unite -buffer-name=files file_rec/async file/new"
+	endfunction
+	function! g:DoUniteNonFuzzy()
+		call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_nothing')
+		call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+		call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_glob')
+		exec "Unite -buffer-name=files file_rec/async file/new"
+	endfunction
+	function! g:DoUniteFuzzyQuickfix()
+		call unite#custom#source('quickfix', 'sorters', 'sorter_rank')
+		call unite#custom#source('quickfix', 'matchers', 'matcher_fuzzy')
+		exec "Unite -buffer-name=quickfix quickfix"
+	endfunction
+	function! g:DoUniteNonFuzzyQuickfix()
+		call unite#custom#source('quickfix', 'sorters', 'sorter_nothing')
+		call unite#custom#source('quickfix', 'matchers', 'matcher_glob')
+		exec "Unite -buffer-name=quickfix quickfix"
+	endfunction
+	function! UltiSnipsCallUnite()
+		Unite -immediately -no-empty -vertical -buffer-name=ultisnips ultisnips
+		return ''
+	endfunction
+	
+	" Bindings
+	inoremap <silent><leader>l<tab> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+	nnoremap <silent><leader>l<tab> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+	nnoremap <silent><leader>lr :call g:DoUniteFuzzy()<CR>
+	nnoremap <silent><leader>lR :call g:DoUniteNonFuzzy()<CR>
+	nnoremap <silent><leader>lq :call g:DoUniteFuzzyQuickfix()<CR>
+	nnoremap <silent><leader>lQ :call g:DoUniteNonFuzzyQuickfix()<CR>
+	nnoremap <silent><leader>le :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
+	nnoremap <silent><leader>lE :<C-u>Unite -buffer-name=files file_mru bookmark file_rec/async file/new<CR>
+	nnoremap <silent><leader>lB :<C-u>Unite -buffer-name=buffers buffer<CR>
+	nnoremap <silent><leader>lb :<C-u>Unite -buffer-name=buffers buffer_tab<CR>
+	nnoremap <silent><leader>ly :<C-u>Unite -buffer-name=yanks history/yank<CR>
+	nnoremap <silent><leader>lc :<C-u>Unite -buffer-name=changes change<CR>
+	nnoremap <silent><leader>lj :<C-u>Unite -buffer-name=jumps jump<CR>
+	nnoremap <silent><leader>lf :<C-u>Unite -buffer-name=jumps jump<CR>
+	nnoremap <silent><leader>l; :<C-u>Unite -buffer-name=commands history/command<CR>
+	nnoremap <silent><leader>l/ :<C-u>Unite -buffer-name=commands history/search<CR>
+	nnoremap <silent><leader>lo :<C-u>Unite -buffer-name=outline outline<CR>
+	nnoremap <silent><leader>la :<C-u>Unite -buffer-name=outline -vertical outline<CR>
+	nnoremap <silent><leader>ll :<C-u>Unite -buffer-name=line line<CR>
+	nnoremap <silent><leader>lw :<C-u>Unite -buffer-name=location_list location_list<CR>
+	nnoremap <silent><leader>l* :<C-u>UniteWithCursorWord -buffer-name=line line<CR>
+	nnoremap <silent><leader>lg :<C-u>Unite -buffer-name=grep grep<CR>
+	nnoremap <silent><leader>lG "zyiw:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+	vnoremap <silent><leader>lG "zy:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+	nnoremap <silent><leader>ls :<C-u>Unite session<CR>
+	nnoremap <silent><leader>lt :<C-u>Unite -buffer-name=tags tag<CR>
+	nnoremap <silent><leader>lT :<C-u>Unite -buffer-name=tagfiles tag/file<CR>
+	nnoremap <silent><leader>li :<C-u>Unite -buffer-name=autotags tag/include<CR>
+	nnoremap <silent><leader>ld :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru directory<CR>
+	nnoremap <silent><leader>l, :<C-u>UniteResume<CR>
+	nnoremap <silent><leader>lv :<C-u>UniteResume<CR>
+	nnoremap <silent><leader>lV :<C-u>UniteResume
+	
+	nnoremap <leader>lS :<C-u>UniteSessionSave
+	
+	function! s:unite_my_settings()
+	"Don't add parens to my filters
+	let b:delimitMate_autoclose = 0
+	
+	"Keymaps inside the unite split
+	nmap <buffer> <nowait> <leader>d <Plug>(unite_exit)
+	nmap <buffer> <nowait> <C-c> <Plug>(unite_exit)
+	imap <buffer> <nowait> <C-c> <Plug>(unite_exit)
+	
+	nnoremap <buffer> <C-n> <Plug>(unite_select_next_line)
+	nnoremap <buffer> <C-p> <Plug>(unite_select_previous_line)
+	
+	nnoremap <buffer> <Up> 3<c-y>
+	nnoremap <buffer> <Down> 3<c-e>
+	inoremap <buffer> <Up> <esc>3<c-y>
+	inoremap <buffer> <Down> <esc>3<c-e>
+	
+	inoremap <silent><buffer><expr> <C-j> unite#do_action('split')
+	nnoremap <silent><buffer><expr> <C-j> unite#do_action('split')
+	inoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
+	nnoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
+	endfunction
+	
+	if has("autocmd")
+	augroup UniteSettingsGroup
+		" Clear autocmds for this group
+		autocmd!
+		autocmd FileType unite call s:unite_my_settings()
+		augroup end
+	endif
 " }}} Unite"
-
-" Fasd
-" 03_03_2016
-let g:unite_fasd#fasd_path = '/usr/local/bin/fasd'
-
+"Fasd
+	" 03_03_2016
+	let g:unite_fasd#fasd_path = '/usr/local/bin/fasd'
 "CtrlP Z - fasd
-" let g:ctrlp_extensions = ['Z', 'F']
-
-nnoremap sz :CtrlPZ<Cr>
-nnoremap sf :CtrlPF<Cr>
-
-"fzf.vim
-set rtp+=/usr/local/opt/fzf
-
-" CtrlP {{{ "
-" http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-"ctrlP
+	" let g:ctrlp_extensions = ['Z', 'F']
+	nnoremap sz :CtrlPZ<Cr>
+	nnoremap sf :CtrlPF<Cr>
+	"fzf.vim
+	set rtp+=/usr/local/opt/fzf
+"CtrlP {{{ "
+	" http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
+	let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 	let g:ctrlp_use_caching = 1
 	if executable('ag')
 		set grepprg=ag\ --nogroup\ --nocolor
@@ -784,7 +768,6 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 		\ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
 		\ }
 	endif
-
 	"ctrlp related
 	"from http://pyjamacoder.com/2013/04/25/getting-fuzzy-with-ctrlp/ in the
 	"comments, did not try as of 20/12/13
@@ -793,7 +776,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 	set wildignore+=*/tmp/*,*/Library/*,*/android-sdk*/*,*/eclipse/*,*.so,*.swp,*.zip,*.pdf,*.mp3,*.doc*,*.xls*
 	let g:ctrlp_clear_cache_on_exit=0
 	let g:ctrlp_extensions = ['dir',  'undo',  'bookmarkdir', 'Z', 'F']
-
+	
 	" 2 Mar 2014 http://www.blaenkdenum.com/posts/dots/
 	"if executable('ag')
 	"  set grepprg=ag\ -nogroup\ --nocolor
@@ -801,4 +784,4 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 	""  let g:ctrlp_use_caching = 0
 	"endif
 	let g:ctrlp_working_path_mode = 'ra'
-" }}}  CtrlP "
+	"}}}

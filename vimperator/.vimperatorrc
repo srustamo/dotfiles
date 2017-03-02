@@ -1,0 +1,206 @@
+set hintchars=hjklasdfgyuopqwertnmzxcvb
+
+"map -count -modes=n,v j -builtin <count>5j
+"map -count -modes=n,v J <count>:tp<Return>
+"map -count -modes=n,v k -builtin <count>5k
+"map -count -modes=n,v K <count>:tn<Return>
+"map -count -modes=n,v пе <count>gt
+"map -count -modes=n,v пЕ <count>gT
+"map -count -modes=n,v Ф <count>A
+"map -count -modes=n,v И <count>B
+"map -count -modes=n,v С <count>C
+"map -count -modes=n,v В <count>D
+"map -count -modes=n,v У <count>E
+"map -count -modes=n,v А <count>F
+"map -count -modes=n,v П <count>G
+"map -count -modes=n,v Р <count>H
+"map -count -modes=n,v Ш <count>I
+"map -count -modes=n,v О <count>J
+"map -count -modes=n,v Л <count>K
+"map -count -modes=n,v Д <count>L
+"map -count -modes=n,v Ь <count>M
+"map -count -modes=n,v Т <count>N
+"map -count -modes=n,v Щ <count>O
+"map -count -modes=n,v З <count>P
+"map -count -modes=n,v Й <count>Q
+"map -count -modes=n,v К <count>R
+"map -count -modes=n,v Ы <count>S
+"map -count -modes=n,v Е <count>T
+"map -count -modes=n,v Г <count>U
+"map -count -modes=n,v М <count>V
+"map -count -modes=n,v Ц <count>W
+"map -count -modes=n,v Ч <count>X
+"map -count -modes=n,v Н <count>Y
+"map -count -modes=n,v Я <count>Z
+"map -count -modes=n,v ф <count>a
+"map -count -modes=n,v и <count>b
+"map -count -modes=n,v с <count>c
+"map -count -modes=n,v в <count>d
+"map -count -modes=n,v у <count>e
+"map -count -modes=n,v а <count>f
+"map -count -modes=n,v п <count>g
+"map -count -modes=n,v р <count>h
+"map -count -modes=n,v ш <count>i
+"map -count -modes=n,v о <count>j
+"map -count -modes=n,v л <count>k
+"map -count -modes=n,v д <count>l
+"map -count -modes=n,v ь <count>m
+"map -count -modes=n,v т <count>n
+"map -count -modes=n,v щ <count>o
+"map -count -modes=n,v з <count>p
+"map -count -modes=n,v й <count>q
+"map -count -modes=n,v к <count>r
+"map -count -modes=n,v ы <count>s
+"map -count -modes=n,v е <count>t
+"map -count -modes=n,v г <count>u
+"map -count -modes=n,v м <count>v
+"map -count -modes=n,v ц <count>w
+"map -count -modes=n,v ч <count>x
+"map -count -modes=n,v н <count>y
+"map -count -modes=n,v я <count>z
+"map -count -modes=n,v Ж <count>:
+
+"set defsearch=google-ssl
+"set hintkeys=asdfghjkl
+"set passkeys+=chrome*://:cbd<CR><left><right><Del>
+
+" 10 Aug 2014 from http://stackoverflow.com/questions/1026096/vimperator-recommended-setting
+" default place for downloads:
+cd ~/Downloads
+
+" no close buttons on tabs
+set! browser.tabs.closeButtons=2
+
+" May be default hints would suit You better - but they were to small for me:
+":highlight Hint font:"DejaVu Sans Mono";font-size:120%;color:red;background-color:yellow;padding:2px;
+:highlight Hint font:"Roboto";font-size:100%;color:white;background-color:grey;padding:1px;
+":highlight HintActive:     background-color: rgba( 85, 102, 187, 0.8); color: #dddded;
+:highlight HintActive color: #EBECEE; background: #eaeaea;
+:highlight HintElem background-color: #00CC000;
+"to prevent d on the last tab from closing the window:
+:set! browser.tabs.closeWindowWithLastTab=false
+
+" encrypted google - is better for hints (it has less links)
+" :bmark https://encrypted.google.com/search?sclient=psy&hl=en&complete=0&site=webhp&source=hp&q=%s -keyword google
+" set defsearch=google
+
+" ==================
+"" Cyrillic letters:
+map Ф A
+map И B
+map С C
+map В D
+map У E
+map А F
+map П G
+map Р H
+map Ш I
+map О J
+map Л K
+map Д L
+map Ь M
+map Т N
+map Щ O
+map З P
+map Й Q
+map К R
+map Ы S
+map Е T
+map Г U
+map М V
+map Ц W
+map Ч X
+map Н Y
+map Я Z
+map ф a
+map и b
+map с c
+map в d
+map у e
+map а f
+map п g
+map р h
+map ш i
+map о j
+map л k
+map д l
+map ь m
+map т n
+map щ o
+map з p
+map й q
+map к r
+map ы s
+map е t
+map г u
+map м v
+map ц w
+map ч x
+map н y
+map я z
+
+" 11 Aug 2014 http://stackoverflow.com/questions/1026096/vimperator-recommended-setting
+" :set wildoption=auto " this doesn't exist
+"set cpt=l
+" 11 Aug 2014 from above
+"set! browser.tabs.closeButtons=1
+
+" 11 Aug 2014 more from above link
+" Mappings
+ map K gt
+ map J gT
+" map a B
+" map j  <count>5j " this is from pentadactylrc. doesn't work
+"11 Aug 2014 https://github.com/chibi/chibi_home/blob/master/configs/.vimperatorrc
+noremap j 3j
+noremap k 3k
+map A :set gui=tabs<CR>
+" Options
+set visualbell
+set complete=sbf
+"set complete=hbsf " h options slows 
+set showstatuslinks=1
+
+" 11 Aug 2014 more above
+" highlight! Hint font-family: monospace; font-size: 16px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;
+
+set editor="/usr/local/bin/mvim -f"
+
+" 12_06_2015 
+" none - hide all, then incrementaly add 
+set gui=none,notabs,addons
+set tabnumbers
+
+" 15_07_2015
+"http://superuser.com/questions/704015/hide-status-line-bottom-bar-in-vimperator
+"javascript to hide statusbar
+noremap <silent> <F8> :js toggle_bottombar()<CR>
+noremap : :js toggle_bottombar('on')<CR>:
+noremap o :js toggle_bottombar('on')<CR>o
+noremap O :js toggle_bottombar('on')<CR>O
+noremap t :js toggle_bottombar('on')<CR>t
+noremap T :js toggle_bottombar('on')<CR>T
+noremap / :js toggle_bottombar('on')<CR>/
+"cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
+cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
+
+:js << EOF
+function toggle_bottombar(p) {
+	var bb = document.getElementById('liberator-bottombar');
+        if (!bb)
+		return;
+	if (p == 'on'){
+        	bb.style.height = '';
+		bb.style.overflow = '';
+        	return;
+        }
+	if (p == 'off'){
+		bb.style.height = '0px';
+		bb.style.overflow = 'hidden';
+		return;
+        }
+	bb.style.height = (bb.style.height == '') ? '0px' : '';
+        bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+}
+toggle_bottombar();
+EOF

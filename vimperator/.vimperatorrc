@@ -73,9 +73,13 @@ set! browser.tabs.closeButtons=2
 
 " May be default hints would suit You better - but they were to small for me:
 ":highlight Hint font:"DejaVu Sans Mono";font-size:120%;color:red;background-color:yellow;padding:2px;
-:highlight Hint font:"Roboto";font-size:100%;color:white;background-color:grey;padding:1px;
+":highlight Hint font:"Roboto";font-size:100%;color:white;background-color:grey;padding:1px;
 ":highlight HintActive:     background-color: rgba( 85, 102, 187, 0.8); color: #dddded;
-:highlight HintActive color: #EBECEE; background: #eaeaea;
+" 11 Aug 2014 
+"https://www.colorcodehex.com/f5ae13/
+highlight Hint font:"Roboto"; font-size: 13px; font-weight: thin; text-transform: uppercase; color: black; background-color: #FBDD9D; border-color: black; border-width: 1px; border-style: solid; padding: 0px 1px 0px 1px;
+"highlight Hint font-family: monospace; font-size: 16px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;
+:highlight HintActive color: #EBECEE; background: #00CC000;" #eaeaea;
 :highlight HintElem background-color: #00CC000;
 "to prevent d on the last tab from closing the window:
 :set! browser.tabs.closeWindowWithLastTab=false
@@ -161,8 +165,6 @@ set complete=sbf
 "set complete=hbsf " h options slows 
 set showstatuslinks=1
 
-" 11 Aug 2014 more above
-" highlight! Hint font-family: monospace; font-size: 16px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;
 
 set editor="/usr/local/bin/mvim -f"
 

@@ -1,0 +1,3 @@
+[submodule "zshrc/zsh_plugins/zsh-history-substring-search"]
+	path = zshrc/zsh_plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git

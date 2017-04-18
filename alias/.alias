@@ -226,3 +226,8 @@ alias e='emacsclient -t'
 alias rr="ranger"
 alias v='f -e vim' # quick opening files with vim
 alias r='d -e ranger' # quick opening files with vim
+#Leave ranger in a viewed dir
+#18.14.2017
+#https://superuser.com/questions/1043806/is-it-possible-to-exit-from-ranger-file-explorer-back-to-command-prompt-but
+alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'
+

@@ -186,6 +186,16 @@ noremap / :js toggle_bottombar('on')<CR>/
 "cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
 cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
 
+"20-04-2017
+"leader
+let mapleader = ','
+
+"test mapleader
+noremap ,h :echo "Hello"
+
+"tabgroups
+noremap ,t :tabgroups switch 
+
 :js << EOF
 function toggle_bottombar(p) {
 	var bb = document.getElementById('liberator-bottombar');

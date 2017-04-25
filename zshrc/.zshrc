@@ -15,7 +15,7 @@ stty -ixon -ixoff           # enable i-search
 #   14_01_2016 https://github.com/pengwynn/dotfiles/blob/master/zsh/config.zsh
 # setopt complete_aliases
 
-# history
+#{{{ history
 export HISTSIZE=20000
 export HISTFILE="$HOME/.zhistory"
 export SAVEHIST=$HISTSIZE
@@ -28,6 +28,7 @@ setopt histnostore          # don't store history related functions
 setopt incappendhistory     # incrementally add items to HISTFILE
 # setopt histverify           # confirm !: or ^ command results before execution
 setopt share_history        # share history between sessions ???
+#}}}
 
 eval "$(dircolors -b $HOME/GitHub/LS_COLORS/LS_COLORS)"
 # LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
@@ -67,6 +68,7 @@ autoload -U send-break
 autoload -U delete-char-or-list
 zle -N bash-ctrl-d
 
+#{{{ oh-my-zsh
 # Path to your oh-my-zsh installation.
 # export ZSH=$HOME/.oh-my-zsh
 
@@ -119,13 +121,13 @@ zle -N bash-ctrl-d
 
 
 # source $ZSH/oh-my-zsh.sh
-
+#}}}
 # reduce Esc delay
 # http://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
 
 # add zsh-completions of homebrew
-fpath=(~/Dropbox/dotfiles /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions $fpath)
+fpath=(~/Dropbox/dotfiles /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions ~/dotfiles/zshrc/zsh_plugins/zsh-autosuggestions $fpath)
 
 # compsys initialization
 # setopt noautomenu
@@ -150,25 +152,11 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias r="ranger"
-
-#
 #Shavkat here 12.29.14
 #https://github.com/robbyrussell/oh-my-zsh/issues/2189
 bindkey -v
 #Shavkat here 12_01_2016
 #looks like the slow vi mode has been resolved; put vi-mode plugin back in
-
 
 #26_06_2015
 #https://github.com/clvv/fasd
@@ -246,7 +234,7 @@ copy() {
 # https://coderwall.com/p/s-2_nw/change-iterm2-color-profile-from-the-cli
 it2prof() { echo -e "\033]50;SetProfile=$1\a" }
 
-# Prompt
+#{{{ Prompt
 autoload -U promptinit && promptinit
 prompt pure
 
@@ -270,12 +258,12 @@ zle -N zle-keymap-select
 #}
 #zle -N zle-line-init
 #zle -N zle-keymap-select
-
+#}}}
 TRAPWINCH() {
 	    zle && zle .reset-prompt && zle -R
 	}
 
-# syntax highlight
+#{{{ syntax highlight
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -294,19 +282,14 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
         # Unknown.
 fi
+#}}}
 
-# history-substring-search
+#{{{ history-substring-search
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
 source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         # POSIX compatibility layer and Linux environment emulation for Windows
@@ -319,6 +302,33 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
         # Unknown.
 fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+#}}}
+
+#{{{ zsh-autosuggestions
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	source ~/dotfiles/zshrc/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+	source ~/dotfiles/zshrc/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+        # POSIX compatibility layer and Linux environment emulation for Windows
+elif [[ "$OSTYPE" == "msys" ]]; then
+        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+elif [[ "$OSTYPE" == "win32" ]]; then
+        # I'm not sure this can happen.
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        # ...
+else
+        # Unknown.
+fi
+#}}}
 
 # bind k and j for VI mode
 bindkey -M vicmd 'k' history-substring-search-up
@@ -340,6 +350,7 @@ setopt HIST_IGNORE_ALL_DUPS
 #####zle -N zle-keymap-select
 
 # source these at the end recommended 
+#{{{zsh-syntax-highlighting
 # https://github.com/zsh-users/zsh-syntax-highlighting#faq 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
@@ -362,7 +373,7 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
         # Unknown.
 fi
-
+#}}}
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

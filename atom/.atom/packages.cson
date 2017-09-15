@@ -1,0 +1,13 @@
+packages: [
+  "atom-ide-ui"
+  "ex-mode"
+  "file-icons"
+  "ide-haskell"
+  "ide-python"
+  "ide-typescript"
+  "language-lisp"
+  "minimap"
+  "package-sync"
+  "project-manager"
+  "vim-mode-plus"
+]

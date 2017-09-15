@@ -170,8 +170,8 @@ set editor="/usr/local/bin/mvim -f"
 
 " 12_06_2015 
 " none - hide all, then incrementaly add 
-set gui=none,notabs,addons
-set tabnumbers
+set gui=addons
+" set tabnumbers
 
 " 15_07_2015
 "http://superuser.com/questions/704015/hide-status-line-bottom-bar-in-vimperator

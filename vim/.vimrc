@@ -785,3 +785,10 @@
 	"endif
 	let g:ctrlp_working_path_mode = 'ra'
 	"}}}
+" cursorline
+" https://www.blaenkdenum.com/posts/dots/
+	augroup cursorline
+		autocmd!
+		autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+		autocmd WinLeave * setlocal nocursorline
+	augroup END

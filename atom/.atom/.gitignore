@@ -6,4 +6,4 @@ storage
 .node-gyp
 .npm
 packages
-packages.cson
+projects.cson

@@ -5,6 +5,8 @@
 "Buffers
 	"7 Mar 2014
 	set hidden
+"Windows
+	"undoquit.vim plugin Sat Dec  2 01:03:25 2017 in submodule
 "Load files
 	" source $HOME/.vim/setup/uniterc.vim
 	"
@@ -21,10 +23,28 @@
 	"http://stackoverflow.com/questions/279959/how-can-i-make-shiftspacebar-page-up-in-vim
 	"nnoremap <Space> <C-f>
 	"nnoremap <S-Space> <C-b>
-	
+
 	"26_06_2015
 	"http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 	nnoremap <Leader>w :w<CR>
+
+	"insert date   Sat Dec  2 00:38:41 UZT 2017
+	:nnoremap <F3> "=strftime("%c")<CR>P
+	:inoremap <F3> <C-R>=strftime("%c")<CR>
+
+	"Unimpaired  https://github.com/tpope/vim-unimpaired Sat Dec  2 00:40:56 UZT 2017
+	nmap < [
+	nmap > ]
+	omap < [
+	omap > ]
+	xmap < [
+	xmap > ]
+
+	"undoquit plugin https://github.com/AndrewRadev/undoquit.vim Sat Dec 2 00:57:48 2017
+	"A known problem is that the plugin doesn't work for <c-w>c, since that mapping doesn't 
+	"seem to throw a QuitPre autocommand. If you use it, you could make it work by calling 
+	"the undoquit "save history" function manually:
+	nnoremap <c-w>c :call undoquit#SaveWindowQuitHistory()<cr><c-w>c
 "Leader maps
 	" 26_06_2015
 	"https://www.reddit.com/r/vim/comments/1vdrxg/space_is_a_big_key_what_do_you_map_it_to/
@@ -49,13 +69,13 @@
 
 	" 11 Jul 2014
 	"let maplocalleader = '\'
-	
-	"23_Dec_14 https://medium.com/@mozhuuuuu/vimmers-you-dont-need-nerdtree-18f627b561c3 
+
+	"23_Dec_14 https://medium.com/@mozhuuuuu/vimmers-you-dont-need-nerdtree-18f627b561c3
 	map <leader>k :E<cr>
 "UI
 	"http://stackoverflow.com/questions/16047146/disable-bell-in-macvim
 	" 26_06_2015
-	set noerrorbells 
+	set noerrorbells
 	set novisualbell
 	autocmd! GUIEnter * set vb t_vb=
 	" Use the same symbols as TextMate for tabstops and EOLs
@@ -72,7 +92,7 @@
 	" colorscheme delek
 	" 28_12_2015
 	call togglebg#map("")
-	" so ~/.vim/colors/vim-colors-solarized/autoload/togglebg.vim	
+	" so ~/.vim/colors/vim-colors-solarized/autoload/togglebg.vim
 	" let g:solarized_termtrans = 1
 	colorscheme solarized
 	set background=light
@@ -101,7 +121,7 @@
 	"	  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
 	"	  autocmd BufEnter * match OverLength /\%74v.*/
 	"augroup END
-	
+
 	" 2 Apr 2014 http://youtu.be/aHm36-na4-4#t=2m52s
 	"highlight ColorColum ctermbg=magenta
 	"call matchadd('ColorColum', '\%81v', 100)
@@ -121,7 +141,7 @@
 	highlight MyLineTooLongMarker ctermbg=magenta guibg=Magenta
 	call matchadd('MyLineTooLongMarker', '\%81v', 100)
 
-	if strftime("%H") < 17 
+	if strftime("%H") < 17
 		set background=light
 	else
 		set background=dark
@@ -142,7 +162,7 @@
 	autocmd BufRead  mytips.txt	    set filetype=help
 	autocmd BufRead  mytips.txt	    set noreadonly
 	autocmd BufRead  mytips.txt	    set modifiable
-	
+
 	nmap <leader>h :tabnew ~/.vim/doc/mytips.txt<CR>
 "VimOrganizer
 	""\ 11 Jul 2014 15 Aug 2014 this if from VimOrganizer https://github.com/hsitz/VimOrganizer ___ this does not work with vim-orgmode
@@ -157,7 +177,7 @@
 	"let g:ft_ignore_pat = '\.org'
 	"filetype plugin indent on
 	"" and then put these lines in vimrc somewhere after the line above
-	"au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+	"au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 	"au BufEnter *.org            call org#SetOrgFileType()
 	"let g:org_capture_file = '~/org_files/mycaptures.org'
 	"command! OrgCapture :call org#CaptureBuffer()
@@ -171,7 +191,7 @@
 	""==============================================================
 	"
 	"" The variables below are used to define the default Todo list and
-	"" default Tag list.  Both of these can also be defined 
+	"" default Tag list.  Both of these can also be defined
 	"" on a document-specific basis by config lines in a file.
 	"" See :h vimorg-todo-metadata and/or :h vimorg-tag-metadata
 	"" 'TODO | DONE' is the default, so not really necessary to define it at all
@@ -182,7 +202,7 @@
 	"" include a tags setup string if you want:
 	"let g:org_tags_alist='{@home(h) @work(w) @tennisclub(t)} {easy(e) hard(d)} {computer(c) phone(p)}'
 	""
-	"" g:org_agenda_dirs specify directories that, along with 
+	"" g:org_agenda_dirs specify directories that, along with
 	"" their subtrees, are searched for list of .org files when
 	"" accessing EditAgendaFiles().  Specify your own here, otherwise
 	"" default will be for g:org_agenda_dirs to hold single
@@ -241,7 +261,7 @@
 	"    " heading when unfolded and one for folded.  Default is to make
 	"    " them the same except for the folded version being bold:
 	"    " assign OL1 pair for level 1, OL2 pair for level 2, etc.
-	"    "hi! OL1 guifg=somecolor guibg=somecolor 
+	"    "hi! OL1 guifg=somecolor guibg=somecolor
 	"    "hi! OL1Folded guifg=somecolor guibg=somecolor gui=bold
 	"
 	"
@@ -292,20 +312,20 @@
 	"
 	"    " Use g:org_todo_custom_highlights to set up highlighting for individual
 	"    " TODO items.  Without this all todos that designate an unfinished state
-	"    " will be highlighted using NOTDONETODO highlight (see above) 
+	"    " will be highlighted using NOTDONETODO highlight (see above)
 	"    " and all todos that designate a finished state will be highlighted using
 	"    " the DONETODO highlight (see above).
-	"    let g:org_todo_custom_highlights = 
+	"    let g:org_todo_custom_highlights =
 	"               \     { 'NEXT': { 'guifg':'#888888', 'guibg':'#222222',
 	"               \              'ctermfg':'gray', 'ctermbg':'darkgray'},
-	"               \      'WAITING': { 'guifg':'#aa3388', 
+	"               \      'WAITING': { 'guifg':'#aa3388',
 	"               \                 'ctermfg':'red' } }
 	"
 	"endfunction
 	"
 	"" Below are two examples of Org-mode "hook" functions
 	"" These present opportunities for end-user customization
-	"" of how VimOrganizer works.  For more info see the 
+	"" of how VimOrganizer works.  For more info see the
 	"" documentation for hooks in Emacs' Org-mode documentation:
 	"" http://orgmode.org/worg/org-configs/org-hooks.php#sec-1_40
 	""
@@ -327,7 +347,7 @@
 	"endfunction
 	"
 "Rainbow Parentheses
-	" 22_Dec_14 
+	" 22_Dec_14
 	" installed https://github.com/kien/rainbow_parentheses.vim
 	let g:rbpt_colorpairs = [
 	\ ['brown',       'RoyalBlue3'],
@@ -357,7 +377,7 @@
 	"26_Dec_14
 	" let g:airline#extensions#tabline#tab_nr_type = 1
 	"28_12_2015
-	" let g:airline_powerline_fonts = 1
+	let g:airline_powerline_fonts = 1 
 	"}}}
 	"" 23_Dec_14 https://github.com/blaenk/dots/blob/275b3b40fa0c57f1b48b5ba59b9ecbc00cddf866/vim/vimrc.ln#L80-L202
 	let g:airline_theme = 'solarized'
@@ -462,6 +482,8 @@
 	"\ '' : 'S-B',
 	"\ }
 	""}}}
+	set laststatus=2 " Always display the statusline in all windows "https://github.com/vim-airline/vim-airline/issues/20  Fri Dec  1 23:48:33 UZT 2017
+	" without the above airline would not show up, but only in splits	
 "Tmux-line {{{
 	" \'z'    : '#H'}
 	let g:tmuxline_preset = {
@@ -792,3 +814,6 @@
 		autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 		autocmd WinLeave * setlocal nocursorline
 	augroup END
+"Completion
+	"http://vim.wikia.com/wiki/Omni_completion Sat Dec  2 01:10:50 2017
+	set omnifunc=syntaxcomplete#Complete

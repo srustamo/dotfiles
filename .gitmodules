@@ -40,3 +40,12 @@
 [submodule "vim/.vim/bundle/vim-fugitive"]
 	path = vim/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/.vim/bundle/vim-commentary"]
+	path = vim/.vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "vim/.vim/bundle/vim-minimap"]
+	path = vim/.vim/bundle/vim-minimap
+	url = https://github.com/severin-lemaignan/vim-minimap.git
+[submodule "vim/.vim/bundle/undoquit.vim"]
+	path = vim/.vim/bundle/undoquit.vim
+	url = https://github.com/AndrewRadev/undoquit.vim.git

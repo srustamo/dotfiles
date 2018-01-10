@@ -1,0 +1,225 @@
+go#config
+config defaultToCurrentScreen false
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+config windowHintsBackgroundColor 50;53;58;0.9
+config windowHintsFontColor	1;1;1;0.9
+config windowHintsFontSize 40
+config windowHintsFontName Arial
+config windowHintsHeight 40
+config windowHintsWidth 40
+config windowHintsRoundedCornerSize 0
+#config windowHintsOrder persist
+config windowHintsDuration 5
+
+#--------------------------------------------------------------------
+## Aliases
+##--------------------------------------------------------------------
+## Modal key
+#alias modal-key u,shift;cmd
+#alias modal-key ctrl;space
+## 28_01_2015 commented backup  alias modal-key ctrl;0
+alias modal-key cmd;j
+#
+## Some apps
+alias app-browser2 'Google Chrome'
+alias app-browser 'Firefox'
+alias app-editor 'MacVim'
+alias app-irc 'Textual'
+alias app-music 'Spotify'
+alias app-terminal 'iTerm2'
+alias app-editor2 'Emacs'
+alias app-chm 'CHM Reader'
+alias app-skim 'Skim'
+
+#
+## Easy helpers for long variable names...
+#alias sox screenOriginX
+#alias soy screenOriginY
+#alias ssx screenSizeX
+#alias ssy screenSizeY
+#_________________________
+#default 3monitors count:3
+#
+# 3 monitor layout
+layout 3monitors 'Finder' move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2  				1	#${1-rightbottom}
+layout 3monitors 'Firefox'  move screenOriginX;screenOriginY screenSizeX;screenSizeY					      	0	#${0-full}
+layout 3monitors 'MacVim'  move screenOriginX;screenOriginY screenSizeX;screenSizeY						1 # 1 full
+layout 3monitors 'iCal'  move screenOriginX;screenOriginY screenSizeX;screenSizeY						2 # 1 full
+layout 3monitors 'Adobe Acrobat Pro'  move screenOriginX;screenOriginY screenSizeX;screenSizeY					1 # 1 full
+layout 3monitors 'VMware Fusion'  move screenOriginX;screenOriginY screenSizeX;screenSizeY					0 # 0 full
+layout 3monitors 'Activity Monitor':REPEAT move screenOriginX;screenOriginY screenSizeX/2;screenSizeY				2 # 0 lefthalf
+layout 3monitors 'Todo':REPEAT move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY				2 # 0 righthalf
+
+
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+
+# 1 monitor layout
+layout 1monitor 'Finder' move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2 				0
+layout 1monitor 'Activity Monitor'	move screenOriginX;screenOriginY screenSizeX/2;screenSizeY				0 # 0 full
+layout 1monitor 'Adobe Acrobat Pro':REPEAT move screenOriginX;screenOriginY screenSizeX;screenSizeY				0 # 1 full
+#layout 1monitor 'Finder' #{full}
+#layout 1monitor 'iTunes':REPEAT ${full}
+
+# 2 monitor layout
+layout 2monitors 'Finder' move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2 				0
+layout 2monitors 'MacVim'  move screenOriginX;screenOriginY screenSizeX;screenSizeY						0 # 1 full
+layout 2monitors 'VMware Fusion'  move screenOriginX;screenOriginY screenSizeX;screenSizeY					0 # 0 full
+layout 2monitors 'Adobe Acrobat Pro':REPEAT  move screenOriginX;screenOriginY screenSizeX;screenSizeY				0 # 1 full
+layout 2monitors 'Activity Monitor':REPEAT move screenOriginX;screenOriginY screenSizeX/2;screenSizeY				1 # 0 lefthalf
+layout 2monitors 'Todo':REPEAT move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY				1 # 0 righthalf
+
+# Default Layouts
+default 1monitor  count:1
+default 2monitors  count:2
+default 3monitors count:3
+
+# Monitor Aliases
+alias mon-laptop   	2
+alias mon-samsung  	0
+alias mon-dell		1
+
+# Concrete positions
+alias 0-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY         ${mon-samsung}
+alias 0-left        move screenOriginX;screenOriginY screenSizeX/2;screenSizeY         ${mon-samsung}
+alias 0-right       move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY         ${mon-samsung}
+alias 1-left        move screenOriginX;screenOriginY screenSizeX/2;screenSizeY         ${mon-dell}
+alias 2-right       move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY         ${mon-laptop}
+alias 2-righttop    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2       ${mon-laptop}
+alias 2-rightbottom move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2       ${mon-laptop}
+alias 1-rightbottom move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2      1
+
+# Aliases
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias leftthird move screenOriginX;screenOriginY screenSizeX/3;screenSizeY
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias rightthird move screenOriginX+screenSizeX/3+screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
+alias middlethird move screenOriginX+screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
+alias tophalf move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
+alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# https://github.com/dashkb/.files/blob/master/home/.slate
+#alias modal-key ctrl,s
+
+# Bindings
+# bind esc:alt,ctrl relaunch
+
+# Resize Bindings
+#bind l:f6 resize +1% +0
+#bind l:alt resize +1% +0
+#bind h:alt resize -1% +0
+#bind k:alt resize +0 -1%
+#bind j:alt resize +0 +1%
+#bind l:ctrl;alt resize -1% +0 bottom-right
+#bind h:ctrl;alt resize +1% +0 bottom-right
+#bind k:ctrl;alt resize +0 +1% bottom-right
+#bind j:ctrl;alt resize +0 -1% bottom-right
+
+# Move/Corner bindings
+#bind return:shift;cmd ${full}
+#bind k:i,cmd ${tophalf}
+#bind j:shift;cmd ${bottomhalf}
+#bind a:shift;cmd ${lefthalf}
+#bind h:shift;alt;cmd ${leftthird}
+#bind i:shift;alt;cmd ${middlethird}
+#bind b:shift;cmd ${bottomleft}
+#bind y:shift;cmd ${topleft}
+#bind l:shift;cmd ${righthalf}
+#bind l:shift;alt;cmd ${rightthird}
+#bind .:shift;cmd ${bottomright}
+#bind p:shift;cmd ${topright}
+
+
+# Move windows to certain locations on the screen
+#bind f:${modal-key}:toggle ${full}
+bind s:${modal-key}:toggle ${full}
+bind space:${modal-key}:toggle ${full}
+bind h:${modal-key}:toggle ${lefthalf}
+bind l:${modal-key}:toggle ${righthalf}
+bind j:${modal-key}:toggle ${bottomhalf}
+bind k:${modal-key}:toggle ${tophalf}
+bind y:${modal-key}:toggle ${topleft}
+#bind u:${modal-key}:toggle ${topright}
+bind p:${modal-key}:toggle ${topright}
+bind n:${modal-key}:toggle ${bottomleft}
+bind .:${modal-key}:toggle ${bottomright}
+
+# Trhow screen
+bind 1:i,cmd throw 0
+bind 2:i,cmd throw 1
+bind 3:i,cmd throw 2
+
+# Nudge Bindings
+#bind l:shift;alt nudge +5% +0
+#bind h:shift;alt nudge -5% +0
+#bind k:shift;alt nudge +0 -5%
+#bind j:shift;alt nudge +0 +5%
+
+# Focus Bindings
+#bind l:shift;ctrl focus right
+#bind h:shift;ctrl focus left
+#bind k:shift;ctrl focus up
+#bind j:shift;ctrl focus down
+#bind k:shift;ctrl;alt focus above
+bind k:i,cmd focus above
+#bind j:shift;ctrl;alt focus behind
+bind j:i,cmd focus behind
+
+#bind right:cmd focus right
+#bind left:cmd focus left
+#bind up:cmd focus up
+#bind down:cmd focus down
+#bind up:cmd;alt focus behind
+#bind down:cmd;alt focus behind
+
+# first line uses modal key https://github.com/hunner/hunners-homedir-configs/blob/master/.slate
+#bind /:i,cmd hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
+#bind i:${modal-key}:toggle hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
+bind k:cmd hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
+#bind /:i,cmd hint
+
+# Window grid from http://thume.ca/howto/2012/11/19/using-slate/
+#bind g:cmd grid padding:5 0:4,2 1:8,3 2:4,4
+#bind g:${modal-key}:grid padding:5 0:6,2 1:8,3 2:2,4 #this did not work
+
+ Relaunch slate
+#bind pad0:ctrl relaunch
+
+# Focus helpers
+bind f:i,cmd focus ${app-browser}
+bind v:i,cmd focus ${app-editor}
+#bind i:i,cmd focus ${app-irc}
+#bind m:i,cmd focus ${app-music}
+bind t:i,cmd focus ${app-terminal}
+bind a:i,cmd focus 'Finder'
+bind e:i,cmd focus ${app-editor2}
+bind c:i,cmd focus ${app-chm}
+bind r:i,cmd focus ${app-browser2}
+bind s:i,cmd focus ${app-skim}
+bind b:i,cmd focus 'VirtualBox VM'
+#bind o:i,cmd focus 'iBooks'
+#bind o:i,cmd focus 'Kindle'
+bind o:i,cmd focus 'E-book Viewer'
+
+## Focus windows in certain directions
+bind h:i,cmd focus left
+bind l:i,cmd focus right
+bind j:i,cmd focus down
+bind k:i,cmd focus up
+
+## Toggle  
+##bind j:i,cmd toggle 'Emacs','Adobe Acrobat Pro'
+# bind j:i,cmd toggle 'Emacs'
+# bind e:i,cmd toggle ${app-editor2},${app-skim}
+##bind a:i,cmd toggle ${app-chm},${app-editor2} 
+# bind t:i,cmd toggle ${app-skim}
+

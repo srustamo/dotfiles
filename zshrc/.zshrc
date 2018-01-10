@@ -263,26 +263,26 @@ TRAPWINCH() {
 	    zle && zle .reset-prompt && zle -R
 	}
 
-#{{{ syntax highlight
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-        # Mac OSX
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-        # POSIX compatibility layer and Linux environment emulation for Windows
-elif [[ "$OSTYPE" == "msys" ]]; then
-        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-elif [[ "$OSTYPE" == "win32" ]]; then
-        # I'm not sure this can happen.
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-        # ...
-else
-        # Unknown.
-fi
-#}}}
+##{{{ syntax highlight
+#if [[ "$OSTYPE" == "linux-gnu" ]]; then
+#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#elif [[ "$OSTYPE" == "darwin"* ]]; then
+#        # Mac OSX
+#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#elif [[ "$OSTYPE" == "cygwin" ]]; then
+#        # POSIX compatibility layer and Linux environment emulation for Windows
+#elif [[ "$OSTYPE" == "msys" ]]; then
+#        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+#elif [[ "$OSTYPE" == "win32" ]]; then
+#        # I'm not sure this can happen.
+#elif [[ "$OSTYPE" == "freebsd"* ]]; then
+#        # ...
+#else
+#        # Unknown.
+#fi
+##}}}
 
 #{{{ history-substring-search
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -358,11 +358,12 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlig
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         # POSIX compatibility layer and Linux environment emulation for Windows
 elif [[ "$OSTYPE" == "msys" ]]; then

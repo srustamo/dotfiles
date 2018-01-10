@@ -289,7 +289,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
+# source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         # POSIX compatibility layer and Linux environment emulation for Windows

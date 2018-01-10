@@ -358,7 +358,7 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlig
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/highlighters
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

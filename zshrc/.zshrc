@@ -127,7 +127,7 @@ zle -N bash-ctrl-d
 export KEYTIMEOUT=1
 
 # add zsh-completions of homebrew
-fpath=(~/Dropbox/dotfiles /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions ~/dotfiles/zshrc/zsh_plugins/zsh-autosuggestions $fpath)
+fpath=(~/Dropbox/dotfiles /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions ~/zsh_plugins/* $fpath)
 
 # compsys initialization
 # setopt noautomenu

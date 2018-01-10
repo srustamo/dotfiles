@@ -55,3 +55,6 @@
 [submodule "vim/.vim/bundle/vim-speeddating"]
 	path = vim/.vim/bundle/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
+[submodule "zshrc/zsh_prompts/pure"]
+	path = zshrc/zsh_prompts/pure
+	url = https://github.com/sindresorhus/pure.git

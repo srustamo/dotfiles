@@ -141,11 +141,11 @@
 	highlight MyLineTooLongMarker ctermbg=magenta guibg=Magenta
 	call matchadd('MyLineTooLongMarker', '\%81v', 100)
 
-	if strftime("%H") < 17
-		set background=light
-	else
-		set background=dark
-	endif
+	" if strftime("%H") < 17
+	" 	set background=light
+	" else
+	" 	set background=dark
+	" endif
 "DBEXT
 	let g:dbext_default_profile_sqlite = 'type=SQLITE:dbname=~/Databases/Movies.db'
 	set number

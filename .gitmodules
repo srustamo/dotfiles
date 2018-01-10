@@ -58,3 +58,6 @@
 [submodule "zshrc/zsh_prompts/pure"]
 	path = zshrc/zsh_prompts/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "zshrc/zsh_plugins/zsh-syntax-highlighting"]
+	path = zshrc/zsh_plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

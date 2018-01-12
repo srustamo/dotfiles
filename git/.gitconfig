@@ -26,8 +26,20 @@
 [diff "word"]
 	binary = true
 	textconv = docx2txt
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
 [status]
 	submoduleSummary = true
 	showUntrackedFiles = all
 [include]
 	path = ~/.gitconfig.rush #personal data
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = rushhike
+	email = rustamoff@gmail.com

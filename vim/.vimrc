@@ -28,6 +28,9 @@
 	"http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 	nnoremap <Leader>w :w<CR>
 
+	"Thu Oct 25 13:24:47 2018
+	nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+
 	"insert date   Sat Dec  2 00:38:41 UZT 2017
 	:nnoremap <F3> "=strftime("%c")<CR>P
 	:inoremap <F3> <C-R>=strftime("%c")<CR>
@@ -48,8 +51,10 @@
 "Leader maps
 	" 26_06_2015
 	"https://www.reddit.com/r/vim/comments/1vdrxg/space_is_a_big_key_what_do_you_map_it_to/
-	nnoremap <SPACE> <Nop>
-	map <Space> :
+	"Thu Oct 25 13:36:45 2018 
+	"removed, it would not WhichKey work
+	" nnoremap <SPACE> <Nop>
+	" map <Space> :
 	map <CR> <Leader>
 
 	" 26_06_201

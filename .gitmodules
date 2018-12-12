@@ -64,3 +64,6 @@
 [submodule "vim/.vim/bundle/vim-which-key"]
 	path = vim/.vim/bundle/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key.git
+[submodule "vim/.vim/bundle/lusty"]
+	path = vim/.vim/bundle/lusty
+	url = https://github.com/sjbach/lusty.git

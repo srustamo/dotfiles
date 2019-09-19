@@ -7,7 +7,7 @@ require "atreus"
 -- init grid
 hs.grid.MARGINX 	= 0
 hs.grid.MARGINY 	= 0
-hs.grid.GRIDWIDTH 	= 4
+hs.grid.GRIDWIDTH 	= 9
 hs.grid.GRIDHEIGHT 	= 4
 
 -- disable animation
@@ -366,3 +366,18 @@ end)
 	-- { key='i', unit=hs.grid.pushWindowNextSceen()},
 	-- { key='o', unit=hs.grid.pushWindowPrevScreen()},
 	-- { key='.', unit=hs.hints.windowHints},
+	--
+screenMode:bind('', 'g', function()
+				   hs.grid.show()
+				   -- screenMode:exit()
+end)
+
+
+screenMode:bind('', 't', function()
+				   hs.grid.adjustWidth( 1)
+				   -- screenMode:exit()
+end)
+screenMode:bind('', 'b', function()
+				   hs.grid.adjustWidth(-1)
+				   -- screenMode:exit()
+end)

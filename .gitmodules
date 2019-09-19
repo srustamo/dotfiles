@@ -67,3 +67,6 @@
 [submodule "vim/.vim/bundle/lusty"]
 	path = vim/.vim/bundle/lusty
 	url = https://github.com/sjbach/lusty.git
+[submodule "vim/.vim/bundle/onehalf"]
+	path = vim/.vim/bundle/onehalf
+	url = https://github.com/sonph/onehalf.git

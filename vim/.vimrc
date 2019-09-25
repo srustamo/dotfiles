@@ -826,3 +826,23 @@
 "Completion
 	"http://vim.wikia.com/wiki/Omni_completion Sat Dec  2 01:10:50 2017
 	set omnifunc=syntaxcomplete#Complete
+"Cursor shape in iTerm2 and tmux Wed Sep 25 15:58:29 2019, "https://gist.github.com/andyfowler/1195581
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+"Delay in cursor
+" upon hitting escape to change modes,
+" send successive move-left and move-right
+" commands to immediately redraw the cursor
+inoremap <special> <Esc> <Esc>hll
+
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver25-iCursor
+set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10

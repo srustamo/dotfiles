@@ -556,6 +556,10 @@
 	set iminsert=0
 	set imsearch=0
 	highlight lCursor guifg=NONE guibg=Cyan
+	"xkbswitch
+		let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+		let g:XkbSwitchEnabled = 1
+		let g:XkbSwitchIMappings = ['ru']
 "Spelling
 	" http://habrahabr.ru/post/98393/ 09_09_2015
 	" :setlocal spell spelllang=ru_yo,en_us

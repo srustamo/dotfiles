@@ -394,6 +394,9 @@
 	let g:airline_left_alt_sep = ''
 	let g:airline_right_sep = ''
 	" let g:airline_right_alt_sep = '⮃'
+	" Wed Dec 12 19:50:15 2018
+	" let g:airline#extensions#branch#enabled = 1 
+	let g:airline#extensions#keymap#enabled = 0
 	" let g:airline_symbols.branch = ''
 	" let g:airline_symbols.readonly = 'RO'
 	" let g:airline_symbols.linenr = '⭡'

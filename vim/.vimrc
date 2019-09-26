@@ -137,7 +137,8 @@
 	"https://github.com/blaenk/dots/blob/275b3b40fa0c57f1b48b5ba59b9ecbc00cddf866/vim/vimrc.ln#L80-L202
 	if has('unix') && 'Darwin' == system('echo -n "$(uname)"')
 		" mac
-		set gfn=Menlo\ for\ Powerline:h12
+		" set gfn=Menlo\ for\ Powerline:h12
+		set gfn=PragmataPro\ Nerd\ Font:h12
 	endif
 	"}}}
 	"
@@ -411,7 +412,7 @@
 	"let g:airline_section_gutter = airline#section#create(['modified', '%='])
 	"let g:airline_section_x = airline#section#create_right([''])
 	"let g:airline_section_y = airline#section#create_right(['%c'])
-	"let g:airline_section_z = airline#section#create(['branch'])
+	" let g:airline_section_y = airline#section#create(['branch'])
 	"endfunction
 	"autocmd Vimenter * call AirLineBlaenk()
 	"let g:airline_theme_patch_func = 'AirLineBlaenkTheme'
@@ -562,7 +563,8 @@
 		let g:XkbSwitchIMappings = ['ru']
 "Spelling
 	" http://habrahabr.ru/post/98393/ 09_09_2015
-	" :setlocal spell spelllang=ru_yo,en_us
+	:setlocal spell spelllang=ru_yo,en_us
+	:setlocal nospell 
 	"Diminactive - reduce brightness of inactive window
 	let g:diminactive_enable_focus = 1
 	" let g:diminactive_use_syntax = 1

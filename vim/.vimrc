@@ -826,6 +826,16 @@
 "Completion
 	"http://vim.wikia.com/wiki/Omni_completion Sat Dec  2 01:10:50 2017
 	set omnifunc=syntaxcomplete#Complete
+"Bookmark last buffers
+"https://stackoverflow.com/questions/16082991/vim-switching-between-files-rapidly-using-vanilla-vim-no-plugins Fri Nov  9 15:23:46 2018
+	augroup VIMRC
+		autocmd!
+		autocmd BufLeave *.css  normal! mC
+		autocmd BufLeave *.html normal! mH
+		autocmd BufLeave *.js   normal! mJ
+		autocmd BufLeave *.php  normal! mP
+		autocmd BufLeave *.txt  normal! mT
+	augroup END
 "Cursor shape in iTerm2 and tmux Wed Sep 25 15:58:29 2019, "https://gist.github.com/andyfowler/1195581
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"

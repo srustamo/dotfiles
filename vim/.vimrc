@@ -386,10 +386,10 @@
 	"}}}
 	"" 23_Dec_14 https://github.com/blaenk/dots/blob/275b3b40fa0c57f1b48b5ba59b9ecbc00cddf866/vim/vimrc.ln#L80-L202
 	let g:airline_theme = 'solarized'
-	" if !exists('g:airline_symbols')
-	" 	let g:airline_symbols = {}
-	" endif
-	let g:airline_left_sep = ''
+	if !exists('g:airline_symbols')
+		let g:airline_symbols = {}
+	endif
+	let g:airline_symbols.dirty='*'
 	let g:airline_left_alt_sep = ''
 	let g:airline_right_sep = ''
 	" let g:airline_right_alt_sep = '⮃'

@@ -1,0 +1,219 @@
+{
+    "workbench.colorTheme": "Solarized Light+",
+    "workbench.iconTheme": "vs-minimal",
+    "workbench.statusBar.visible": true,
+    "vim.foldfix": true,
+    "editor.fontFamily": "PragmataPro",
+    "editor.fontLigatures": true,
+    "vim.enableNeovim": true,
+    "vim.hlsearch": true,
+    "breadcrumbs.enabled": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": true,
+    "terminal.external.osxExec": "iTerm2.app",
+    "editor.suggestSelection": "first",
+    "python.jediEnabled": false,
+
+    "vim.leader": ",",
+    "vim.visualModeKeyBindingsNonRecursive": [
+      {
+        "before": ["%"],
+        "commands": ["extension.matchitJumpItems"]
+      },
+      {
+        "before": ["<leader>","x", "x"],
+        "commands": ["editor.action.smartSelect.expand"]
+      },
+      {
+        "before": ["<leader>","z", "z"],
+        "commands": ["editor.action.smartSelect.shrink"]
+      },
+      {
+        "before": ["<leader>","c", "i"],
+        "commands": ["editor.action.commentLine"]
+      },
+      {
+        "before": ["<leader", "a", "a"],
+        "commands": ["editor.action.clipboardCopyAction"]
+      },
+      {
+        "before": ["<leader>","q", "q"],
+        "commands": ["workbench.action.findInFiles"]
+      },
+      {
+        "before": ["<leader>","s", "s"],
+        "commands": ["actions.find"]
+      }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": ["<leader>","x", "x"],
+        "commands": ["editor.action.smartSelect.expand"]
+      },
+      {
+        "before": ["<leader>","q", "q"],
+        "commands": ["workbench.action.findInFiles"]
+      },
+      {
+        "before": ["<leader>","f", "p"],
+        "commands": ["workbench.action.files.copyPathOfActiveFile"]
+      },
+      {
+        "before": ["<leader>","f", "n"],
+        "commands": ["copyRelativeFilePath"]
+      },
+      {
+        "before": ["<leader>","t", "p"],
+        "commands": ["workbench.action.togglePanel"]
+      },
+      {
+        "before": ["<leader>","x", "m"],
+        "commands": ["workbench.action.showCommands"]
+      },
+      {
+        "before": ["<leader>","c", "i"],
+        "commands": ["editor.action.commentLine"]
+      },
+      {
+        "before": ["<leader>","t", "a"],
+        "commands": ["workbench.action.toggleActivityBarVisibility"]
+      },
+      {
+        "before": ["<leader>","t", "b"],
+        "commands": ["workbench.action.toggleSidebarVisibility"]
+      },
+      {
+        "before": ["<leader>","x", "s"],
+        "commands": ["workbench.action.files.save"]
+      },
+      {
+        "before": ["<leader>","s", "s"],
+        "commands": ["actions.find"]
+      },
+      {
+        "before": ["%"],
+        "commands": ["extension.matchitJumpItems"]
+      },
+      {
+        "before": ["<leader>","s", "i"],
+        "commands": ["extension.matchitSelectItems"]
+      },
+      {
+        "before": ["<leader>","x", "f"],
+        "commands": ["workbench.action.files.openFileFolder"]
+      },
+      {
+        "before": ["<leader>", "x", "k"],
+        "commands": ["workbench.action.closeActiveEditor"]
+      },
+      {
+        "before": ["<leader>","r", "r"],
+        "commands": ["workbench.action.openRecent"]
+      },
+      {
+        "before": ["<leader>","k", "k"],
+        "commands": ["workbench.action.quickOpen"]
+      },
+      {
+        "before": ["<leader>","i", "i"],
+        "commands": ["workbench.action.gotoSymbol"]
+      },
+      {
+        "before": ["<leader>","x", "1"],
+        "commands": ["workbench.action.editorLayoutSingle"]
+      },
+      {
+        "before": ["<leader>","x", "3"],
+        "commands": ["workbench.action.splitEditorRight"]
+      },
+      {
+        "before": ["<leader>","x", "2"],
+        "commands": ["workbench.action.splitEditorDown"]
+      },
+      {
+        "before": ["<leader>","x", "4"],
+        "commands": ["workbench.action.editorLayoutTwoByTwoGrid"]
+      },
+      {
+        "before": ["<leader>","x", "0"],
+        "commands": ["workbench.action.closeGroup"]
+      },
+      {
+        "before": ["<leader>","x", "z"],
+        "commands": ["workbench.action.terminal.focus"]
+      },
+      {
+        "before": ["<leader>","f", "f"],
+        "commands": ["workbench.action.toggleZenMode"]
+      },
+      {
+        "before": ["<leader>","w", "q"],
+        "after": [":wq"],
+      },
+	    {
+             "before" : ["u"], // removes dirty status https://github.com/VSCodeVim/Vim/issues/3201
+             "commands" : ["undo"]
+      },
+      {
+             "before" : ["<C-r>"],
+             "commands" : ["redo"]
+      }
+    ],
+    "vim.handleKeys":{
+      "<C-a>": false,
+    },
+    "zenMode.centerLayout": false,
+    // "editor.minimap.enabled": false,
+    "search.exclude": {
+      "**/.git": true,
+      "**/*.bundle.js": true,
+      "**/bin-packages": true,
+      "**/frontend-dist": true,
+      "**/npm-packages-offline-cache": true
+    },
+    "workbench.activityBar.visible": true,
+
+    "customizeUI.font.regular": "Consolas",
+    "customizeUI.font.monospace": "Fira Code",
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.minimap.enabled": false,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "cSpell.userWords": [
+      "финотчетность"
+    ],
+    "cSpell.language": "en,ru",
+    "cSpell.enabledLanguageIds": [
+      "asciidoc",
+      "c",
+      "cpp",
+      "csharp",
+      "css",
+      "git-commit",
+      "go",
+      "handlebars",
+      "haskell",
+      "html",
+      "jade",
+      "java",
+      "javascript",
+      "javascriptreact",
+      "json",
+      "jsonc",
+      "latex",
+      "less",
+      "markdown",
+      "php",
+      "plaintext",
+      "pug",
+      "python",
+      "restructuredtext",
+      "rust",
+      "scala",
+      "scss",
+      "text",
+      "typescript",
+      "typescriptreact",
+      "yaml",
+      "yml"
+    ]
+}

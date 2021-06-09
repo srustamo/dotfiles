@@ -1,0 +1,11 @@
+2gua.rainbow-brackets
+donjayamanne.githistory
+eamodio.gitlens
+mattn.Lisp
+ms-python.python
+ms-vscode.cpptools
+redguardtoo.matchit
+ryanolsonx.solarized
+streetsidesoftware.code-spell-checker
+streetsidesoftware.code-spell-checker-russian
+vscodevim.vim

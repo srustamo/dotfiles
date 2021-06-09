@@ -3,7 +3,6 @@
     "workbench.iconTheme": "vs-minimal",
     "workbench.statusBar.visible": true,
     "vim.foldfix": true,
-    "editor.fontFamily": "PragmataPro",
     "editor.fontLigatures": true,
     "vim.enableNeovim": true,
     "vim.hlsearch": true,
@@ -215,5 +214,8 @@
       "typescriptreact",
       "yaml",
       "yml"
-    ]
+    ],
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "git.autofetch": true,
+    "files.autoGuessEncoding": true
 }

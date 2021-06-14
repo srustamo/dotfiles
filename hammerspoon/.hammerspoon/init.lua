@@ -369,7 +369,7 @@ end)
 	--
 screenMode:bind('', 'g', function()
 				   hs.grid.show()
-				   -- screenMode:exit()
+				   screenMode:exit()
 end)
 
 

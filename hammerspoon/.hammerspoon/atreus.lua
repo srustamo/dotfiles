@@ -35,7 +35,7 @@ for index, usb_device in pairs(usb_table) do
 	end
 end
 
-local usbWatcher = nil
+usbWatcher = nil
 
 function usbDeviceCallback(data)
     if (data["productName"] == "Atreus") then

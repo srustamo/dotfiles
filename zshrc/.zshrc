@@ -384,3 +384,17 @@ if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then source '~/google-cloud-sdk/pat
 
 # The next line enables shell command completion for gcloud.
 if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then source '~/google-cloud-sdk/completion.zsh.inc'; fi
+#pushd Sat Jun 19 19:39:06 2021 
+#https://zsh.sourceforge.io/Intro/intro_6.html
+DIRSTACKSIZE=8
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
+# https://news.ycombinator.com/item?id=6230284
+di() {
+	local dir
+	select dir in $dirstack
+	do
+		echo $dir
+		break
+	done
+	test "x$dir" != x && cd $dir
+    }

@@ -73,3 +73,6 @@
 [submodule "vim/.vim/bundle/vim-xkbswitch"]
 	path = vim/.vim/bundle/vim-xkbswitch
 	url = https://github.com/lyokha/vim-xkbswitch.git
+[submodule "vim/.vim/bundle/vim-sneak"]
+	path = vim/.vim/bundle/vim-sneak
+	url = https://github.com/justinmk/vim-sneak.git

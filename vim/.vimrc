@@ -1,9 +1,65 @@
 "Packaging
 	let g:pathogen_disabled = []
 	call add(g:pathogen_disabled, 'lusty')
+	call add(g:pathogen_disabled, 'ctrlp.vim')
+	call add(g:pathogen_disabled, 'ctrlp-z.vim')
+	call add(g:pathogen_disabled, 'ctrlp_bdelete.vim')
+	" call add(g:pathogen_disabled, 'nerdtree')
+	call add(g:pathogen_disabled, 'onehalf')
+	" call add(g:pathogen_disabled, 'tmuxline.vim')
+	call add(g:pathogen_disabled, 'undoquit.vim')
+	" call add(g:pathogen_disabled, 'vim-airline')
+	" call add(g:pathogen_disabled, 'vim-airline-themes')
+	" call add(g:pathogen_disabled, 'vim-colors-solarized')
+	" call add(g:pathogen_disabled, 'vim-commentary')
+	" call add(g:pathogen_disabled, 'vim-fugitive')
+	" call add(g:pathogen_disabled, 'vim-gitgutter')
+	call add(g:pathogen_disabled, 'vim-minimap')
+	" call add(g:pathogen_disabled, 'vim-orgmode')
+	call add(g:pathogen_disabled, 'vim-speeddating')
+	call add(g:pathogen_disabled, 'vim-unimpaired')
+	" call add(g:pathogen_disabled, 'vim-vinegar')
+	" call add(g:pathogen_disabled, 'vim-which-key')
+	call add(g:pathogen_disabled, 'vim-xkbswitch')
+	" call add(g:pathogen_disabled, 'fzf')
+" lusty
+" nerdtree
+" onehalf
+" tmuxline.vim
+" undoquit.vim
+" vim-airline
+" vim-airline-themes
+" vim-colors-solarized
+" vim-commentary
+" vim-fugitive
+" vim-gitgutter
+" vim-minimap
+" vim-orgmode
+" vim-speeddating
+" vim-unimpaired
+" vim-vinegar
+" vim-which-key
+" vim-xkbswitch
 	execute pathogen#infect()
 	syntax on
 	filetype plugin indent on
+
+	
+" map f <Plug>Sneak_s
+" map F <Plug>Sneak_S
+" autocmd! FileType which_key
+" autocmd  FileType which_key set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+
+" " disable theme in terminal vim
+"     if !has("gui_running")
+"         colorscheme default
+"         " for which-key and floatwindow of fzf
+"         highlight Pmenu guibg=#3A3A3A
+"     endif
+" let g:which_key_use_floating_win = 1
+
 "Buffers and bell
 	"7 Mar 2014
 	set hidden
@@ -41,7 +97,8 @@
 	nnoremap <Leader>w :w<CR>
 
 	"Thu Oct 25 13:24:47 2018
-	nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+	" nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+	" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 	"insert date   Sat Dec  2 00:38:41 UZT 2017
 	:nnoremap <F3> "=strftime("%c")<CR>P
@@ -111,7 +168,7 @@
 	call togglebg#map("")
 	" so ~/.vim/colors/vim-colors-solarized/autoload/togglebg.vim
 	" let g:solarized_termtrans = 1
-	" colorscheme solarized
+	colorscheme solarized
 	set background=light
 	" 2 Mar 2014 looks this works only in gui Vim; tried this in MacVim, not much
 	"success
@@ -150,13 +207,15 @@
 	if has('unix') && 'Darwin' == system('echo -n "$(uname)"')
 		" mac
 		" set gfn=Menlo\ for\ Powerline:h12
-		set gfn=PragmataPro\ Nerd\ Font:h12
+		" set gfn=PragmataPro\ Nerd\ Font:h12
+		set gfn=Hack\ NF:h14
 	endif
 	"}}}
 	"
 	"25_Dec_14 http://superuser.com/questions/771558/line-length-highlighting-works-correctly-in-console-vim-not-gui
 	"this solves the issue of colum not bing highlighted in guivim
-	highlight MyLineTooLongMarker ctermbg=magenta guibg=Magenta
+	" highlight MyLineTooLongMarker ctermbg=magenta guibg=Magenta
+	highlight MyLineTooLongMarker ctermbg=LightGray guibg=Magenta
 	call matchadd('MyLineTooLongMarker', '\%81v', 100)
 
 	" if strftime("%H") < 17
@@ -397,8 +456,10 @@
 	"28_12_2015
 	let g:airline_powerline_fonts = 1 
 	"}}}
+	" Tue Jun  9 17:57:49 2020
+	let g:airline_theme = 'solarized'
 	"" 23_Dec_14 https://github.com/blaenk/dots/blob/275b3b40fa0c57f1b48b5ba59b9ecbc00cddf866/vim/vimrc.ln#L80-L202
-	let g:airline_theme = 'angr'
+	" let g:airline_theme = 'angr'
 	if !exists('g:airline_symbols')
 		let g:airline_symbols = {}
 	endif
@@ -407,7 +468,7 @@
 	let g:airline_right_sep = ''
 	" let g:airline_right_alt_sep = '⮃'
 	" Wed Dec 12 19:50:15 2018
-	" let g:airline#extensions#branch#enabled = 1 
+	let g:airline#extensions#branch#enabled = 1 
 	let g:airline#extensions#keymap#enabled = 0
 	" let g:airline_symbols.branch = ''
 	" let g:airline_symbols.readonly = 'RO'
@@ -801,6 +862,7 @@
 	" let g:ctrlp_extensions = ['Z', 'F']
 	nnoremap sz :CtrlPZ<Cr>
 	nnoremap sf :CtrlPF<Cr>
+	nnoremap sb :CtrlPBookmarkDirAdd<Cr>
 	"fzf.vim
 	set rtp+=/usr/local/opt/fzf
 "CtrlP {{{ "
@@ -873,3 +935,129 @@
 	set guicursor+=i:ver25-iCursor
 	set guicursor+=n-v-c:blinkon0
 	" set guicursor+=i:blinkwait10
+"which_key
+" Map leader to which_key
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+" nnoremap <silent> <leader> :silent WhichKey<CR>
+" vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual ','<CR>
+
+" let g:which_key_map =  {}
+" let g:which_key_sep = ': '
+" Set a shorter timeout, default is 1000
+"set timeoutlen=100
+
+let g:which_key_use_floating_win = 1
+
+"" Single mappings
+"let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'        , 'comment' ]
+"let g:which_key_map['f'] = [ ':Files'                           , 'search files' ]
+"let g:which_key_map['h'] = [ '<C-W>s'                           , 'split below']
+"let g:which_key_map['S'] = [ ':Startify'                        , 'start screen' ]
+"let g:which_key_map['T'] = [ ':Rg'                              , 'search text' ]
+"let g:which_key_map['E'] = [ ':SSave'                           , 'save session']
+"let g:which_key_map['L'] = [ ':SLoad'                           , 'load session']
+"let g:which_key_map['l'] = [ ':Limelight!!'                     , 'limelight']
+"let g:which_key_map['z'] = [ ':Goyo'                            , 'zen mode']
+"let g:which_key_map['r'] = [ ':RnvimrToggle'                    , 'ranger' ]
+"let g:which_key_map['g'] = [ ':FloatermNew lazygit'             , 'git']
+"let g:which_key_map['d'] = [ ':FloatermNew lazydocker'          , 'docker']
+"let g:which_key_map['k'] = [ ':FloatermNew k9s'                 , 'k9s']
+"let g:which_key_map['t'] = [ ':FloatermNew'                     , 'terminal']
+"let g:which_key_map['v'] = [ '<C-W>v'                           , 'split right']
+
+"" s is for search
+"let g:which_key_map.s = {
+"      \ 'name' : '+search' ,
+"      \ '/' : [':History/'                 , 'history'],
+"      \ ';' : [':Commands'                 , 'commands'],
+"      \ 'a' : [':Ag'                       , 'text Ag'],
+"      \ 'b' : [':BLines'                   , 'current buffer'],
+"      \ 'B' : [':Buffers'                  , 'open buffers'],
+"      \ 'c' : [':Commits'                  , 'commits'],
+"      \ 'C' : [':BCommits'                 , 'buffer commits'],
+"      \ 'f' : [':Files'                    , 'files'],
+"      \ 'g' : [':GFiles'                   , 'git files'],
+"      \ 'G' : [':GFiles?'                  , 'modified git files'],
+"      \ 'h' : [':History'                  , 'file history'],
+"      \ 'H' : [':History:'                 , 'command history'],
+"      \ 'l' : [':Lines'                    , 'lines'] ,
+"      \ 'm' : [':Marks'                    , 'marks'] ,
+"      \ 'M' : [':Maps'                     , 'normal maps'] ,
+"      \ 'p' : [':Helptags'                 , 'help tags'] ,
+"      \ 'P' : [':Tags'                     , 'project tags'],
+"      \ 's' : [':CocList snippets'         , 'snippets'],
+"      \ 'S' : [':Colors'                   , 'color schemes'],
+"      \ 't' : [':Rg'                       , 'Rg text'],
+"      \ 'T' : [':BTags'                    , 'buffer tags'],
+"      \ 'w' : [':Windows'                  , 'search windows'],
+"      \ 'y' : [':Filetypes'                , 'file types'],
+"      \ 'z' : [':FZF'                      , 'FZF'],
+"      \ }
+
+"" P is for vim-plug
+"let g:which_key_map.p = {
+"      \ 'name' : '+plug' ,
+"      \ 'i' : [':PlugInstall'              , 'install'],
+"      \ 'u' : [':PlugUpdate'               , 'update'],
+"      \ 'c' : [':PlugClean'                , 'clean'],
+"      \ 's' : [':source ~/.config/nvim/init.vim', 'source vimrc'],
+"      \ }
+"
+"" Register which key map
+"call which_key#register(',', "g:which_key_map")
+""
+let g:ctrlp_z_nerdtree = 1
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+" call ctrlp_bdelete#init()
+"
+" autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  " \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" -----------
+" let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+" let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+" function! FloatingFZF()
+"   let buf = nvim_create_buf(v:false, v:true)
+"   call setbufvar(buf, '&signcolumn', 'no')
+
+"   let height = float2nr(10)
+"   let width = float2nr(80)
+"   let horizontal = float2nr((&columns - width) / 2)
+"   let vertical = 1
+
+"   let opts = {
+"         \ 'relative': 'editor',
+"         \ 'row': vertical,
+"         \ 'col': horizontal,
+"         \ 'width': width,
+"         \ 'height': height,
+"         \ 'style': 'minimal'
+"         \ }
+
+"   call nvim_open_win(buf, v:true, opts)
+" endfunction
+" -------------
+" let g:height = float2nr(&lines * 0.9)
+"   let g:width = float2nr(&columns * 0.95)
+"   let g:preview_width = float2nr(&columns * 0.7)
+"   let g:fzf_buffers_jump = 1
+"   let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+"   let $FZF_DEFAULT_OPTS=" --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4 --preview 'if file -i {}|grep -q binary; then file -b {}; else bat --style=changes --color always --line-range :40 {}; fi' --preview-window right:" . g:preview_width
+"   let g:fzf_layout = { 'window': 'call FloatingFZF(' . g:width . ',' . g:height . ')' }
+"   ----------------
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = []
+" nnoremap <C-p> :<C-u>FZF<CR> 
+nnoremap <leader>s :<C-u>FZF<CR> 
+nnoremap <C-p> :Files<Cr>
+nnoremap <leader>m :<C-u>Marks<CR> 
+let g:fzf_vim_statusline = 0
+" let g:airline#extensions#branch#enabled = 0

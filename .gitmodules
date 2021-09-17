@@ -76,3 +76,21 @@
 [submodule "vim/.vim/bundle/vim-sneak"]
 	path = vim/.vim/bundle/vim-sneak
 	url = https://github.com/justinmk/vim-sneak.git
+[submodule "zshrc/zsh_plugins/fzf-marks"]
+	path = zshrc/zsh_plugins/fzf-marks
+	url = git@github.com:urbainvaes/fzf-marks.git
+[submodule "vim/.vim/bundle/ctrlp-z"]
+	path = vim/.vim/bundle/ctrlp-z
+	url = git@github.com:amiorin/ctrlp-z.git
+[submodule "vim/.vim/bundle/ctrlp_bdelete.vim"]
+	path = vim/.vim/bundle/ctrlp_bdelete.vim
+	url = git@github.com:d11wtq/ctrlp_bdelete.vim.git
+[submodule "vim/.vim/bundle/fzf.vim"]
+	path = vim/.vim/bundle/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
+[submodule "vim/.vim/bundle/vim-fasd"]
+	path = vim/.vim/bundle/vim-fasd
+	url = git@github.com:amiorin/vim-fasd.git
+[submodule "vim/.vim/bundle/tlib_vim"]
+	path = vim/.vim/bundle/tlib_vim
+	url = git@github.com:tomtom/tlib_vim.git

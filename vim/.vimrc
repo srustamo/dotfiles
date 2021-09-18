@@ -5,11 +5,11 @@
 	call add(g:pathogen_disabled, 'ctrlp-z.vim')
 	call add(g:pathogen_disabled, 'ctrlp_bdelete.vim')
 	" call add(g:pathogen_disabled, 'nerdtree')
-	call add(g:pathogen_disabled, 'onehalf')
+	" call add(g:pathogen_disabled, 'onehalf')
 	" call add(g:pathogen_disabled, 'tmuxline.vim')
 	call add(g:pathogen_disabled, 'undoquit.vim')
-	" call add(g:pathogen_disabled, 'vim-airline')
-	" call add(g:pathogen_disabled, 'vim-airline-themes')
+	call add(g:pathogen_disabled, 'vim-airline')
+	call add(g:pathogen_disabled, 'vim-airline-themes')
 	" call add(g:pathogen_disabled, 'vim-colors-solarized')
 	" call add(g:pathogen_disabled, 'vim-commentary')
 	" call add(g:pathogen_disabled, 'vim-fugitive')
@@ -1061,3 +1061,21 @@ nnoremap <C-p> :Files<Cr>
 nnoremap <leader>m :<C-u>Marks<CR> 
 let g:fzf_vim_statusline = 0
 " let g:airline#extensions#branch#enabled = 0
+"------
+" Sat Sep 18 18:27:01 2021
+"Lightline
+"{{{
+"
+set rtp+=~/dotfiles/vim/.vim/bundle/onehalf/vim
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \	'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \}
+"}}}

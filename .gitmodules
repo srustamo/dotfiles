@@ -97,3 +97,12 @@
 [submodule "vim/.vim/bundle/lightline.vim"]
 	path = vim/.vim/bundle/lightline.vim
 	url = git@github.com:itchyny/lightline.vim.git
+[submodule "vim/.vim/bundle/vim-showmarks"]
+	path = vim/.vim/bundle/vim-showmarks
+	url = git@github.com:jacquesbh/vim-showmarks.git
+[submodule "vim/.vim/bundle/ctrlp-mark"]
+	path = vim/.vim/bundle/ctrlp-mark
+	url = git@github.com:mattn/ctrlp-mark.git
+[submodule "vim/.vim/bundle/vim-devicons"]
+	path = vim/.vim/bundle/vim-devicons
+	url = git@github.com:ryanoasis/vim-devicons.git

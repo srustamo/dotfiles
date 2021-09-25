@@ -1,9 +1,10 @@
 "Packaging
 	let g:pathogen_disabled = []
 	call add(g:pathogen_disabled, 'lusty')
-	call add(g:pathogen_disabled, 'ctrlp.vim')
-	call add(g:pathogen_disabled, 'ctrlp-z.vim')
-	call add(g:pathogen_disabled, 'ctrlp_bdelete.vim')
+	" call add(g:pathogen_disabled, 'ctrlp.vim')
+	" call add(g:pathogen_disabled, 'ctrlp-z.vim')
+	" call add(g:pathogen_disabled, 'ctrlp_bdelete.vim')
+	" call add(g:pathogen_disabled, 'ctrlp_mark')
 	" call add(g:pathogen_disabled, 'nerdtree')
 	" call add(g:pathogen_disabled, 'onehalf')
 	" call add(g:pathogen_disabled, 'tmuxline.vim')
@@ -21,7 +22,8 @@
 	" call add(g:pathogen_disabled, 'vim-vinegar')
 	" call add(g:pathogen_disabled, 'vim-which-key')
 	call add(g:pathogen_disabled, 'vim-xkbswitch')
-	" call add(g:pathogen_disabled, 'fzf')
+	call add(g:pathogen_disabled, 'fzf.vim')
+	" call add(g:pathogen_disabled, 'lightline.vim')
 " lusty
 " nerdtree
 " onehalf
@@ -113,14 +115,14 @@
 	xmap > ]
 
 	"undoquit plugin https://github.com/AndrewRadev/undoquit.vim Sat Dec 2 00:57:48 2017
-	"A known problem is that the plugin doesn't work for <c-w>c, since that mapping doesn't 
-	"seem to throw a QuitPre autocommand. If you use it, you could make it work by calling 
+	"A known problem is that the plugin doesn't work for <c-w>c, since that mapping doesn't
+	"seem to throw a QuitPre autocommand. If you use it, you could make it work by calling
 	"the undoquit "save history" function manually:
 	nnoremap <c-w>c :call undoquit#SaveWindowQuitHistory()<cr><c-w>c
 "Leader maps
 	" 26_06_2015
 	"https://www.reddit.com/r/vim/comments/1vdrxg/space_is_a_big_key_what_do_you_map_it_to/
-	"Thu Oct 25 13:36:45 2018 
+	"Thu Oct 25 13:36:45 2018
 	"removed, it would not WhichKey work
 	" nnoremap <SPACE> <Nop>
 	" map <Space> :
@@ -468,7 +470,7 @@
 	let g:airline_right_sep = ''
 	" let g:airline_right_alt_sep = '⮃'
 	" Wed Dec 12 19:50:15 2018
-	let g:airline#extensions#branch#enabled = 1 
+	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#keymap#enabled = 0
 	" let g:airline_symbols.branch = ''
 	" let g:airline_symbols.readonly = 'RO'
@@ -567,20 +569,16 @@
 	set laststatus=2 " Always display the statusline in all windows "https://github.com/vim-airline/vim-airline/issues/20  Fri Dec  1 23:48:33 UZT 2017
 	" without the above airline would not show up, but only in splits	
 "Tmux-line {{{
-	" \'z'    : '#H'}
-	let g:tmuxline_preset = {
-	\'a'    : '#S',
-	\'win'  : ['#I', '#W'],
-	\'cwin' : ['#I', '#W', '#F'],
-	\'y'    : ['%R', '%a', '%Y'],
-	\'z'    : '#H'}
-	""}}}
-	let g:tmuxline_separators = {
-	\ 'left' : '',
-	\ 'left_alt': '',
-	\ 'right' : '',
-	\ 'right_alt' : '',
-	\ 'space' : ' '}
+  let g:tmuxline_preset = 'minimal'
+	 " let g:tmuxline_preset = {
+      " \'a'    : '#S',
+      " \'c'    : ['#(whoami)', '#(uptime  | cut -d " " -f 1,2,3)'],
+      " \'win'  : ['#I', '#W'],
+      " \'cwin' : ['#I', '#W', '#F'],
+      " \'x'    : '#(date)',
+      " \'y'    : ['%R', '%a', '%Y'],
+      " \'z'    : '#H'}
+" " }}}
 "Mode aware cursor {{{
 	"" https://github.com/blaenk/dots/blob/9843177fa6155e843eb9e84225f458cd0205c969/vim/vimrc.ln#L49-L64
 	"" 23_Dec_14
@@ -1056,9 +1054,10 @@ nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_preview_window = []
 " nnoremap <C-p> :<C-u>FZF<CR> 
-nnoremap <leader>s :<C-u>FZF<CR> 
-nnoremap <C-p> :Files<Cr>
-nnoremap <leader>m :<C-u>Marks<CR> 
+nnoremap <leader>s :<C-u>FZF<CR>
+" nnoremap <C-p> :Files<Cr>
+nnoremap <leader>M :<C-u>Marks<CR>
+nnoremap <leader>m :<C-u>FZFMru<CR>
 let g:fzf_vim_statusline = 0
 " let g:airline#extensions#branch#enabled = 0
 "------
@@ -1069,13 +1068,110 @@ let g:fzf_vim_statusline = 0
 set rtp+=~/dotfiles/vim/.vim/bundle/onehalf/vim
 
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \	'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \}
-"}}}
+	\ 'colorscheme': 'solarized',
+	\	'active': {
+	\     'left': [ [ 'mode', 'paste' ],
+	\             [ 'gitbranch', 'readonly', 'filename', ] ],
+	\     'right': [
+	\        		[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+	\         	['percent', 'lineinfo'],
+	\         	['fileformat'],
+	\			['indent'] ],
+	\ },
+	\ 'component_function': {
+	\	'gitbranch': 'FugitiveHead',
+	\ 'indent': 'LightlineIndent',
+	\ 'fileformat': 'LightLineFileformat',
+	\	'filename' : 'LightlineFname3',
+	\ },
+	\ 'mode_map': {
+	\ 'n' : 'N',
+	\ 'i' : 'I',
+	\ 'R' : 'R',
+	\ 'v' : 'V',
+	\ 'V' : 'VL',
+	\ "\<C-v>": 'VB',
+	\ 'c' : 'C',
+	\ 's' : 'S',
+	\ 'S' : 'SL',
+	\ "\<C-s>": 'SB',
+	\ 't': 'T',
+	\ },
+	\}
+
+function! LightlineFilename()
+	" return winwidth(0) > 120 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
+	return expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+endfunction
+" Tue Sep 21 15:17:09 2021"
+"https://github.com/itchyny/lightline.vim/issues/532
+function! LightlineTruncatedFileName()
+let l:filePath = expand('%')
+    if winwidth(0) > 100
+        return l:filePath
+    else
+        return pathshorten(l:filePath, 2)
+    endif
+endfunction
+
+function! LightlineFilename2()
+	let name = ""
+	let subs = split(expand('%'), "/") 
+	let i = 1
+	for s in subs
+		let parent = name
+		if  i == len(subs)
+			let name = parent . '/' . s
+		elseif i == 1
+			let name = s
+		else
+			let name = parent . '/' . strpart(s, 0, 2)
+		endif
+		let i += 1
+	endfor
+  return name
+endfunction
+
+function! LightlineFname3() 
+  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') 
+  let filename = LightlineTruncatedFileName()
+
+  let modified = ModifiedStatus()
+  if filename == ''
+      return ''
+  endif
+  return join([filename, icon, modified],'')
+endfunction
+
+" Tue Sep 21 15:22:00 2021
+" https://github.com/itchyny/lightline.vim/issues/593
+" https://ncona.com/2016/04/disable-expandtab-in-vim/
+function! LightlineIndent() abort
+  return (&expandtab ? "Sp" : "Tb") . ':' . (&expandtab ? &shiftwidth : &tabstop)
+endfunctio
+" Wed Sep 22 16:06:21 2021
+"https://github.com/itchyny/lightline.vim/issues/405
+function! LightLineFileformat()
+  return &fileencoding . ' ' . FileFormatIcon()
+endfunction
+
+function! FileFormatIcon()
+  return strlen(&filetype) ? WebDevIconsGetFileFormatSymbol() : 'no ft'
+endfunction
+
+
+function! LightLineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! ModifiedStatus()
+  let modified = LightLineModified()
+  return ('' != modified ? ' ' . modified : '')
+endfunction
+      "}}}
+     
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})

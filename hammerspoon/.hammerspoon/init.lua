@@ -17,11 +17,37 @@ hs.window.animationDuration = 0
 -- hotkey mash
 -- the original was {"ctrl", "alt"} - conflicts with HashTWM
 -- local mash       = {"ctrl", "alt"}
-local mash       = {"cmd", "alt"}
+local mash       = {"cmd", "ctrl"}
 local mash_app 	 = {"cmd", "alt", "ctrl"}
 local mash_shift = {"ctrl", "alt", "shift"}
 local mash_test	 = {"cntrl", "shift"}	
+local hyper	 = {"cmd", "alt", "shift", "ctrl"}	
 
+hs.loadSpoon("SpoonInstall")
+Install=spoon.SpoonInstall
+Install:andUse("DismissNotifications", {
+    hotkeys = {
+        all = {hyper, "'"}
+    }
+})
+
+Install:andUse("MenuBar", {
+    hotkeys = {
+        menubar_toggle = {hyper, "m"}
+    }
+})
+Install:andUse("FadeLogo", {
+    config = {
+        default_run = 1.0,
+    },
+    start = true
+})
+-- Install:andUse("MoveSpaces", {
+--     hotkeys = {
+--         space_right = { {'ctrl','shift'}, '.' },
+--         space_left  =  { {'ctrl','shift'}, ',' }
+--     }
+-- })
 --------------------------------------------------------------------------------
 appCuts = {
   -- d = 'Dictionary',
@@ -32,9 +58,47 @@ appCuts = {
   -- 4 reserved for dash shortcut 
   -- q = 'Quiver',
   e = 'emacs',
+  -- e = 'Rush_Emacs',
+  -- e = '/Applications/Emacs.app/Contents/MacOS/Emacs --no-init-file -l "~/Dropbox (Personal)/source/rush-emacs-srmbp2/rush-emacs/init.el" >/dev/null 2>&1 &',
   a = 'Finder',
   -- i = 'Terminal'
 }
+
+function yabai(args)
+
+  hs.task.new("/usr/local/bin/yabai",nil, function(ud, ...)
+    print("stream", hs.inspect(table.pack(...)))
+    return true
+  end, args):start()
+
+end
+-- https://github.com/camspiers/dotfiles/blob/master/files/.config/skhd/skhdrc
+-- hs.hotkey.bind(hyper, "j", function() yabai({"-m", "window", "--focus", "north"}) end)
+-- hs.hotkey.bind(hyper, "k", function() yabai({"-m", "window", "--focus", "south"}) end)
+-- hs.hotkey.bind(hyper, "h", function() yabai({"-m", "window", "--focus", "west"}) end)
+-- hs.hotkey.bind(hyper, "l", function() yabai({"-m", "window", "--focus", "east"}) end)
+
+hs.hotkey.bind(mash, "k", function() yabai({"-m", "window", "--focus", "north"}) end)
+hs.hotkey.bind(mash, "j", function() yabai({"-m", "window", "--focus", "south"}) end)
+hs.hotkey.bind(mash, "h", function() yabai({"-m", "window", "--focus", "west"}) end)
+hs.hotkey.bind(mash, "l", function() yabai({"-m", "window", "--focus", "east"}) end)
+-- hs.hotkey.bind(mash, "r", function() yabai({"-m", "window", "--focus", "recent"}) end)
+-- hs.hotkey.bind(mash, "g", function() yabai({"-m", "window", "--grid", "1:3:0:0:2:1"}) end)
+hs.hotkey.bind(mash, "f", function() yabai({"-m", "window", "--toggle", "zoom-fullscreen"}) end)
+hs.hotkey.bind(mash, "t", function() yabai({"-m", "window", "--toggle", "float"},{"-m", "window", "--grid", "4:4:1:1:2:2"}) end)
+-- space requires scripting addition
+-- hs.hotkey.bind(mash, "1", function() yabai({"-m", "space", "--focus", "1"}) end) 
+-- hs.hotkey.bind(mash, "2", function() yabai({"-m", "space", "--focus", "2"}) end)
+hs.hotkey.bind(mash, "w", function() yabai({"-m", "window", "--swap", "west"}) end)
+hs.hotkey.bind(mash, "e", function() yabai({"-m", "window", "--swap", "east"}) end)
+hs.hotkey.bind(mash, "n", function() yabai({"-m", "window", "--swap", "north"}) end)
+hs.hotkey.bind(mash, "s", function() yabai({"-m", "window", "--swap", "south"}) end)
+-- hs.hotkey.bind(mash, "e", function() yabai({"-m", "window", "--swap", "east"}) end)
+hs.hotkey.bind(mash, "a", function() yabai({"-m", "window", "--resize", "left:-40:0"}) end)
+-- hs.hotkey.bind(mash, "s", function() yabai({"-m", "window", "--resize", "bottom:0:40"}) end)
+-- hs.hotkey.bind(mash, "s", function() yabai({"-m", "window", "--resize", "bottom:0:40"}) end)
+hs.hotkey.bind(mash, "space", function() yabai({"-m", "space", "--balance"}) end)
+hs.hotkey.bind(mash, "r", function() yabai({"-m", "space", "--rotate", "90"}) end)
 
 -- Launch applications
 for key, app in pairs(appCuts) do
@@ -42,14 +106,14 @@ for key, app in pairs(appCuts) do
 end
 
 -- global operations
-hs.hotkey.bind(mash, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
+-- hs.hotkey.bind(mash, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
+-- hs.hotkey.bind(mash, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
 
 -- adjust grid size
-hs.hotkey.bind(mash, '=', function() hs.grid.adjustWidth( 1) end)
-hs.hotkey.bind(mash, '-', function() hs.grid.adjustWidth(-1) end)
-hs.hotkey.bind(mash, ']', function() hs.grid.adjustHeight( 1) end)
-hs.hotkey.bind(mash, '[', function() hs.grid.adjustHeight(-1) end)
+-- hs.hotkey.bind(mash, '=', function() hs.grid.adjustWidth( 1) end)
+-- hs.hotkey.bind(mash, '-', function() hs.grid.adjustWidth(-1) end)
+-- hs.hotkey.bind(mash, ']', function() hs.grid.adjustHeight( 1) end)
+-- hs.hotkey.bind(mash, '[', function() hs.grid.adjustHeight(-1) end)
 
 -- change focus
 hs.hotkey.bind(mash_shift, 'H', function() hs.window.focusedWindow():focusWindowWest() end)
@@ -57,23 +121,23 @@ hs.hotkey.bind(mash_shift, 'L', function() hs.window.focusedWindow():focusWindow
 hs.hotkey.bind(mash_shift, 'K', function() hs.window.focusedWindow():focusWindowNorth() end)
 hs.hotkey.bind(mash_shift, 'J', function() hs.window.focusedWindow():focusWindowSouth() end)
 
-hs.hotkey.bind(mash, 'M', hs.grid.maximizeWindow)
+-- hs.hotkey.bind(mash, 'M', hs.grid.maximizeWindow)
 
 -- multi monitor
-hs.hotkey.bind(mash, 'N', hs.grid.pushWindowNextScreen)
-hs.hotkey.bind(mash, 'P', hs.grid.pushWindowPrevScreen)
+-- hs.hotkey.bind(mash, 'N', hs.grid.pushWindowNextScreen)
+-- hs.hotkey.bind(mash, 'P', hs.grid.pushWindowPrevScreen)
 
 -- move windows
-hs.hotkey.bind(mash, 'H', hs.grid.pushWindowLeft)
-hs.hotkey.bind(mash, 'J', hs.grid.pushWindowDown)
-hs.hotkey.bind(mash, 'K', hs.grid.pushWindowUp)
-hs.hotkey.bind(mash, 'L', hs.grid.pushWindowRight)
+-- hs.hotkey.bind(mash, 'H', hs.grid.pushWindowLeft)
+-- hs.hotkey.bind(mash, 'J', hs.grid.pushWindowDown)
+-- hs.hotkey.bind(mash, 'K', hs.grid.pushWindowUp)
+-- hs.hotkey.bind(mash, 'L', hs.grid.pushWindowRight)
 
 -- resize windows
-hs.hotkey.bind(mash, 'Y', hs.grid.resizeWindowThinner)
-hs.hotkey.bind(mash, 'U', hs.grid.resizeWindowShorter)
-hs.hotkey.bind(mash, 'I', hs.grid.resizeWindowTaller)
-hs.hotkey.bind(mash, 'O', hs.grid.resizeWindowWider)
+-- hs.hotkey.bind(mash, 'Y', hs.grid.resizeWindowThinner)
+-- hs.hotkey.bind(mash, 'U', hs.grid.resizeWindowShorter)
+-- hs.hotkey.bind(mash, 'I', hs.grid.resizeWindowTaller)
+-- hs.hotkey.bind(mash, 'O', hs.grid.resizeWindowWider)
 
 -- Window Hints
 -- hs.hotkey.bind(mash, '.', function() hs.hints.windowHints(hs.window.allWindows()) end)
@@ -86,19 +150,19 @@ hs.hotkey.bind(mash_shift, '0', function() pom_reset_work() end) -- local mash_s
 hs.hotkey.bind(mash_shift, '9', function() hs.alert.closeAll() end)
 
 -- snap all newly launched windows
-local function auto_tile(appName, event)
-	if event == hs.application.watcher.launched then
-		local app = hs.appfinder.appFromName(appName)
-		-- protect against unexpected restarting windows
-		if app == nil then
-			return
-		end
-		hs.fnutils.map(app:allWindows(), hs.grid.snap)
-	end
-end
+-- local function auto_tile(appName, event)
+-- 	if event == hs.application.watcher.launched then
+-- 		local app = hs.appfinder.appFromName(appName)
+-- 		-- protect against unexpected restarting windows
+-- 		if app == nil then
+-- 			return
+-- 		end
+-- 		hs.fnutils.map(app:allWindows(), hs.grid.snap)
+-- 	end
+-- end
 
--- start app launch watcher
-hs.application.watcher.new(auto_tile):start()
+-- -- start app launch watcher
+-- hs.application.watcher.new(auto_tile):start()
 
 
 --------------------------------
@@ -243,7 +307,8 @@ i:bind('', 'escape', function() i:exit() end)
 i:bind('', 'J', 'Pressed J',function() print'let the record show that J was pressed' end)
 i:bind('', 't', function() hs.application.launchOrFocus('iterm') i:exit() end)
 i:bind('', 'E', function() hs.application.launchOrFocus('Emacs') i:exit() end)
-i:bind('', 'R', function() hs.application.launchOrFocus('Google chrome') i:exit() end)
+-- i:bind('', 'R', function() hs.application.launchOrFocus('Google chrome') i:exit() end)
+i:bind('', 'R', function() hs.application.launchOrFocus('Brave Browser') i:exit() end)
 i:bind('', 'F', function() hs.application.launchOrFocus('Firefox') i:exit() end)
 i:bind('', 'A', function() hs.application.launchOrFocus('Finder') i:exit() end)
 

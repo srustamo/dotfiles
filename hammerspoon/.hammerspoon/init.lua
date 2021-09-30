@@ -100,6 +100,14 @@ hs.hotkey.bind(mash, "a", function() yabai({"-m", "window", "--resize", "left:-4
 hs.hotkey.bind(mash, "space", function() yabai({"-m", "space", "--balance"}) end)
 hs.hotkey.bind(mash, "r", function() yabai({"-m", "space", "--rotate", "90"}) end)
 
+-- hs.hotkey.bind(mash,  "1", function()  yabai({ "-m", "window", "--space", "--focus", "1"}) end)
+hs.hotkey.bind(mash,  "1", function()  yabai({ "-m", "window", "--space",  "1"}) end, function() yabai({ "-m", "space", "--focus", "1"}) end)
+hs.hotkey.bind(mash,  "2", function()  yabai({ "-m", "window", "--space",  "2"}) end, function() yabai({ "-m", "space", "--focus", "2"}) end)
+-- hs.hotkey.bind(mash,  "2", function()  yabai({ "-m", "window", "--space", "2"; "yabai", "-m", "space", "--focus", "2" }) end)
+hs.hotkey.bind(mash,  "3", function()  yabai({ "-m", "window", "--space",  "3"}, { "-m", "window", "--space", " --focus", "3"}) end)
+hs.hotkey.bind(mash,  "4", function()  yabai({ "-m", "window", "--space",  "4"}, { "-m", "window", "--space", " --focus", "4"}) end)
+hs.hotkey.bind(mash,  "5", function()  yabai({ "-m", "window", "--space",  "5"}, { "-m", "window", "--space", " --focus", "5"}) end)
+hs.hotkey.bind(mash,  "6", function()  yabai({ "-m", "window", "--space",  "6"}, { "-m", "window", "--space", " --focus", "6"}) end)
 -- Launch applications
 for key, app in pairs(appCuts) do
   hs.hotkey.bind(mash_app, key, function () hs.application.launchOrFocus(app) end)

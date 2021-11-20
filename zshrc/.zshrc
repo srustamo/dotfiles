@@ -291,6 +291,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
 # source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/dotfiles/zshrc/zsh_plugins/fzf-marks/init.zsh
 
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         # POSIX compatibility layer and Linux environment emulation for Windows
@@ -378,12 +379,6 @@ fi
 #}}}
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then source '~/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then source '~/google-cloud-sdk/completion.zsh.inc'; fi
 #pushd Sat Jun 19 19:39:06 2021 
 #https://zsh.sourceforge.io/Intro/intro_6.html
 DIRSTACKSIZE=8
@@ -398,3 +393,86 @@ di() {
 	done
 	test "x$dir" != x && cd $dir
     }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/srmbp1/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/srmbp1/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -e /Users/srmbp1/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/srmbp1/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Wed Sep 15 17:37:15 2021
+# https://www.gregorykapfhammer.com/software/tool/productivity/2017/05/08/Directory-Zooming/
+t() {
+  fasdlist=$( fasd -d -l -r $1 | \
+    fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
+    cd "$fasdlist"
+}
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Thu Sep 16 15:44:59 2021
+#https://github.com/junegunn/fzf/wiki/Color-schemes
+# export FZF_DEFAULT_OPTS='
+#   --color=bg+:#073642,bg:#002b36,spinner:#719e07,hl:#586e75
+#   --color=fg:#839496,header:#586e75,info:#cb4b16,pointer:#719e07
+#   --color=marker:#719e07,fg+:#839496,prompt:#719e07,hl+:#719e07
+# '
+
+_gen_fzf_default_opts() {
+  local base03="234"
+  local base02="235"
+  local base01="240"
+  local base00="241"
+  local base0="244"
+  local base1="245"
+  local base2="254"
+  local base3="230"
+  local yellow="136"
+  local orange="166"
+  local red="160"
+  local magenta="125"
+  local violet="61"
+  local blue="33"
+  local cyan="37"
+  local green="64"
+  # Uncomment for truecolor, if your terminal supports it.
+  # local base03="#002b36"
+  # local base02="#073642"
+  # local base01="#586e75"
+  # local base00="#657b83"
+  # local base0="#839496"
+  # local base1="#93a1a1"
+  # local base2="#eee8d5"
+  # local base3="#fdf6e3"
+  # local yellow="#b58900"
+  # local orange="#cb4b16"
+  # local red="#dc322f"
+  # local magenta="#d33682"
+  # local violet="#6c71c4"
+  # local blue="#268bd2"
+  # local cyan="#2aa198"
+  # local green="#859900"
+
+  # Comment and uncomment below for the light theme.
+
+  # # Solarized Dark color scheme for fzf
+  # export FZF_DEFAULT_OPTS="
+  #   --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+  #   --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  # "
+   ## Solarized Light color scheme for fzf
+	export FZF_DEFAULT_OPTS="
+	--color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+	--color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+	--height 40%
+	--layout=reverse
+	"
+	# --height 40% --layout=reverse'
+}
+_gen_fzf_default_opts
+
+# Thu Sep 16 20:24:26 2021
+bindkey "ç" fzf-cd-widget
+export PATH="/usr/local/opt/ruby/bin:$PATH"

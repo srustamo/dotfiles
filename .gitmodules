@@ -106,3 +106,12 @@
 [submodule "vim/.vim/bundle/vim-devicons"]
 	path = vim/.vim/bundle/vim-devicons
 	url = git@github.com:ryanoasis/vim-devicons.git
+[submodule "vim/.vim/bundle/vim-markdown-extra-preview"]
+	path = vim/.vim/bundle/vim-markdown-extra-preview
+	url = git@github.com:waylan/vim-markdown-extra-preview.git
+[submodule "vim/.vim/bundle/vim-zettel"]
+	path = vim/.vim/bundle/vim-zettel
+	url = https://github.com/michal-h21/vim-zettel.git
+[submodule "vim/.vim/bundle/vimwiki"]
+	path = vim/.vim/bundle/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git

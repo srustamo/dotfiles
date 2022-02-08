@@ -115,3 +115,18 @@
 [submodule "vim/.vim/bundle/vimwiki"]
 	path = vim/.vim/bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule "vim/.vim/bundle/markdown-preview.nvim"]
+	path = vim/.vim/bundle/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim.git
+[submodule "vim/.vim/bundle/vim-markdown-preview"]
+	path = vim/.vim/bundle/vim-markdown-preview
+	url = https://github.com/JamshedVesuna/vim-markdown-preview.git
+[submodule "vim/.vim/bundle/nnn.vim"]
+	path = vim/.vim/bundle/nnn.vim
+	url = https://github.com/mcchrish/nnn.vim
+[submodule "vim/.vim/bundle/joplin.vim"]
+	path = vim/.vim/bundle/joplin.vim
+	url = git@github.com:tenfyzhong/joplin.vim.git
+[submodule "vim/.vim/bundle/bclose.vim"]
+	path = vim/.vim/bundle/bclose.vim
+	url = https://github.com/rbgrouleff/bclose.vim.git

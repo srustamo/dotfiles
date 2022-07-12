@@ -130,3 +130,9 @@
 [submodule "vim/.vim/bundle/bclose.vim"]
 	path = vim/.vim/bundle/bclose.vim
 	url = https://github.com/rbgrouleff/bclose.vim.git
+[submodule "vim/.vim/bundle/vim-lf"]
+	path = vim/.vim/bundle/vim-lf
+	url = https://github.com/thezeroalpha/vim-lf.git
+[submodule "zshrc/zsh_prompts/spaceship-prompt"]
+	path = zshrc/zsh_prompts/spaceship-prompt
+	url = git@github.com:spaceship-prompt/spaceship-prompt.git

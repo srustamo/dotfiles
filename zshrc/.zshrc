@@ -36,8 +36,8 @@ eval "$(dircolors -b $HOME/GitHub/LS_COLORS/LS_COLORS)"
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 setopt AUTO_CD
 
-# keybind
-# bindkey -v                # vi mode
+#{{{ keybind
+bindkey -v                # vi mode
 bindkey "^[[3~" delete-char
 autoload -U select-word-style
 select-word-style bash
@@ -63,65 +63,12 @@ bash-ctrl-d()
         zle delete-char-or-list
     fi
 }
+#}}}
 export IGNOREEOF=1
 autoload -U send-break
 autoload -U delete-char-or-list
 zle -N bash-ctrl-d
 
-#{{{ oh-my-zsh
-# Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# plugins=(git tmux osx)
-#vim-interaction
-
-
-# source $ZSH/oh-my-zsh.sh
-#}}}
 # reduce Esc delay
 # http://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
@@ -151,12 +98,6 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-#Shavkat here 12.29.14
-#https://github.com/robbyrussell/oh-my-zsh/issues/2189
-bindkey -v
-#Shavkat here 12_01_2016
-#looks like the slow vi mode has been resolved; put vi-mode plugin back in
 
 #26_06_2015
 #https://github.com/clvv/fasd
@@ -236,53 +177,21 @@ it2prof() { echo -e "\033]50;SetProfile=$1\a" }
 
 #{{{ Prompt
 autoload -U promptinit && promptinit
+
+# turn on git stash status
+# Tue Jul 12 18:33:31 2022 https://github.com/sindresorhus/pure
+# # turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+
+zstyle :prompt:pure:prompt:success color green 
+
 prompt pure
 
-VIM_PROMPT="❯"
-PROMPT='%(?.%F{green}.%F{red})${VIM_PROMPT}%f '
-
-function zle-line-init zle-keymap-select { 
-    VIM_PROMPT=${${KEYMAP/vicmd/❮}/(main|viins)/❯}
-    zle .reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# PROMPT='%(?.%F{green}.%F{red})${${KEYMAP/vicmd/❮%f}/(main|viins)/❯%f} '
-# PROMPT='[KEYMAP:${KEYMAP-<<unset>>}]%(?.%F{green}.%F{red})${${KEYMAP/vicmd/❮}/(main|viins)/❯}%f '
-#
-#function zle-line-init zle-keymap-select {
-#	# VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-#	# RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-#	zle .reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
-#}}}
+# https://github.com/sindresorhus/pure/issues/184#issuecomment-173482509
 TRAPWINCH() {
 	    zle && zle .reset-prompt && zle -R
 	}
-
-##{{{ syntax highlight
-#if [[ "$OSTYPE" == "linux-gnu" ]]; then
-#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
-#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#elif [[ "$OSTYPE" == "darwin"* ]]; then
-#        # Mac OSX
-#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#elif [[ "$OSTYPE" == "cygwin" ]]; then
-#        # POSIX compatibility layer and Linux environment emulation for Windows
-#elif [[ "$OSTYPE" == "msys" ]]; then
-#        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-#elif [[ "$OSTYPE" == "win32" ]]; then
-#        # I'm not sure this can happen.
-#elif [[ "$OSTYPE" == "freebsd"* ]]; then
-#        # ...
-#else
-#        # Unknown.
-#fi
-##}}}
+#}}}
 
 #{{{ history-substring-search
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -476,3 +385,11 @@ _gen_fzf_default_opts
 # Thu Sep 16 20:24:26 2021
 bindkey "ç" fzf-cd-widget
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+if [ -f /usr/local/bin/nnn/quitcd/quitcd.bash_zsh ]; then
+    source /usr/share/nnn/quitcd/quitcd.bash_zsh
+fi
+
+if [ -f ~/dotfiles/nnn/nnn.zsh ]; then
+   source ~/dotfiles/nnn/nnn.zsh
+fi

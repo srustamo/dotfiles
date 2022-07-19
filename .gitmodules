@@ -49,9 +49,6 @@
 [submodule "vim/.vim/bundle/vim-speeddating"]
 	path = vim/.vim/bundle/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
-[submodule "zshrc/zsh_prompts/pure"]
-	path = zshrc/zsh_prompts/pure
-	url = https://github.com/sindresorhus/pure.git
 [submodule "zshrc/zsh_plugins/zsh-syntax-highlighting"]
 	path = zshrc/zsh_plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -136,3 +133,9 @@
 [submodule "vim/.vim/bundle/vim-vinegar"]
 	path = vim/.vim/bundle/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
+[submodule "zshrc/zsh_prompts/pure"]
+	path = zshrc/zsh_prompts/pure
+	url = git@github.com:sindresorhus/pure.git
+[submodule "kitty/.config/kitty/kitty-themes"]
+	path = kitty/.config/kitty/kitty-themes
+	url = git@github.com:dexpota/kitty-themes.git

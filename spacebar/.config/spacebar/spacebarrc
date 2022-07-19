@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+
+spacebar -m config position             bottom
+spacebar -m config height               20
+spacebar -m config title                on
+spacebar -m config spaces               on
+spacebar -m config clock                on
+spacebar -m config power                on
+spacebar -m config padding_left         20
+spacebar -m config padding_right        20
+spacebar -m config spacing_left         25
+spacebar -m config spacing_right        15
+# spacebar -m config text_font            "Helvetica Neue:Bold:12.0"
+spacebar -m config text_font            "Hack Nerd Font:Regular:12.0"
+# spacebar -m config icon_font            "Font Awesome 5 Free:Solid:12.0"
+spacebar -m config icon_font            "FontAwesome:Regular:12.0"
+spacebar -m config background_color     0xff202020
+spacebar -m config foreground_color     0xffa8a8a8
+spacebar -m config space_icon_color     0xff458588
+spacebar -m config power_icon_color     0xffcd950c
+spacebar -m config battery_icon_color   0xffd75f5f
+spacebar -m config dnd_icon_color       0xffa8a8a8
+spacebar -m config clock_icon_color     0xffa8a8a8
+spacebar -m config power_icon_strip      
+spacebar -m config space_icon_strip     1 2 3 4 5 6 7 8 9 
+# spacebar -m config space_icon_strip     I II III IV V VI VII VIII IX X
+spacebar -m config space_icon           
+spacebar -m config clock_icon           
+spacebar -m config dnd_icon             
+spacebar -m config clock_format         "%a %d %b %R"
+spacebar -m config right_shell          on
+# spacebar -m config left_shell           on
+# spacebar -m config right_shell_icon     
+# spacebar -m config right_shell_icon     
+# spacebar -m config right_shell_command  "git status"
+# spacebar -m config left_shell_command  "$HOME/spacebar_scripts/rssi.sh"
+# spacebar -m config right_shell_command  "ls"
+# spacebar -m config right_shell_command  "$HOME/spacebar_scripts/cpu.sh"
+spacebar -m config right_shell_command  "$HOME/spacebar_scripts/keyboard-layout.sh"
+# while sleep 1 ; do spacebar -m config left_shell_command "date" ; done
+# spacebar -m config left_shell_icon     ""
+# spacebar -m config left_shell_icon     ""
+# while sleep 1 ; do spacebar -m config left_shell_command "$HOME/spacebar_scripts/crypto.sh" ; done
+echo "spacebar configuration loaded.."

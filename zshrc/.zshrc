@@ -12,6 +12,14 @@ export MANWIDTH='100'
 export MANPAGER='nvim +Man!'
 #}}}
 
+#{{{ functions
+# lf `cd` into the last directory upon exit. - kutsan Sat Jul 23 17:58:03 2022
+function lf() {
+  command lf -last-dir-path="$HOME/.local/share/lf/lastdir" "$@" \
+    && cd "$(<$HOME/.local/share/lf/lastdir)" 2>/dev/null
+}
+#}}}
+
 # alias
 [[ -e ~/.alias ]] && emulate sh -c 'source ~/.alias'
 

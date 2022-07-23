@@ -1,3 +1,17 @@
+#{{{ export
+# Basics
+export EDITOR='nvim'
+export PAGER='less'
+export LANG='en_US.UTF-8'
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# man
+export MANWIDTH='100'
+export MANPAGER='nvim +Man!'
+#}}}
+
 # alias
 [[ -e ~/.alias ]] && emulate sh -c 'source ~/.alias'
 

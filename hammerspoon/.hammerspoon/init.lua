@@ -61,6 +61,8 @@ appCuts = {
   -- e = 'Rush_Emacs',
   -- e = '/Applications/Emacs.app/Contents/MacOS/Emacs --no-init-file -l "~/Dropbox (Personal)/source/rush-emacs-srmbp2/rush-emacs/init.el" >/dev/null 2>&1 &',
   a = 'Finder',
+  v = 'VSCodium',
+  b = 'Obsidian',
   -- i = 'Terminal'
 }
 
@@ -152,22 +154,22 @@ hs.hotkey.bind(mash_shift, 'J', function() hs.window.focusedWindow():focusWindow
 hs.hotkey.bind(mash, '.', hs.hints.windowHints)
 
 -- pomodoro key binding
-hs.hotkey.bind(mash, '9', function() pom_enable() end)
-hs.hotkey.bind(mash, '0', function() pom_disable() end) -- local mash       = {"cmd", "alt"}
-hs.hotkey.bind(mash_shift, '0', function() pom_reset_work() end) -- local mash_shift = {"ctrl", "alt", "shift"}
-hs.hotkey.bind(mash_shift, '9', function() hs.alert.closeAll() end)
+-- hs.hotkey.bind(mash, '9', function() pom_enable() end)
+-- hs.hotkey.bind(mash, '0', function() pom_disable() end) -- local mash       = {"cmd", "alt"}
+-- hs.hotkey.bind(mash_shift, '0', function() pom_reset_work() end) -- local mash_shift = {"ctrl", "alt", "shift"}
+-- hs.hotkey.bind(mash_shift, '9', function() hs.alert.closeAll() end)
 
 -- snap all newly launched windows
--- local function auto_tile(appName, event)
--- 	if event == hs.application.watcher.launched then
--- 		local app = hs.appfinder.appFromName(appName)
--- 		-- protect against unexpected restarting windows
--- 		if app == nil then
--- 			return
--- 		end
--- 		hs.fnutils.map(app:allWindows(), hs.grid.snap)
--- 	end
--- end
+local function auto_tile(appName, event)
+    if event == hs.application.watcher.launched then
+        local app = hs.appfinder.appFromName(appName)
+        -- protect against unexpected restarting windows
+        if app == nil then
+            return
+        end
+        hs.fnutils.map(app:allWindows(), hs.grid.snap)
+    end
+end
 
 -- -- start app launch watcher
 -- hs.application.watcher.new(auto_tile):start()
@@ -313,12 +315,15 @@ function i:exited() --hs.alert'I exited '
 end
 i:bind('', 'escape', function() i:exit() end)
 i:bind('', 'J', 'Pressed J',function() print'let the record show that J was pressed' end)
-i:bind('', 't', function() hs.application.launchOrFocus('iterm') i:exit() end)
+i:bind('', 'i', function() hs.application.launchOrFocus('iterm') i:exit() end)
 i:bind('', 'E', function() hs.application.launchOrFocus('Emacs') i:exit() end)
 -- i:bind('', 'R', function() hs.application.launchOrFocus('Google chrome') i:exit() end)
 i:bind('', 'R', function() hs.application.launchOrFocus('Brave Browser') i:exit() end)
 i:bind('', 'F', function() hs.application.launchOrFocus('Firefox') i:exit() end)
 i:bind('', 'A', function() hs.application.launchOrFocus('Finder') i:exit() end)
+i:bind('', 'V', function() hs.application.launchOrFocus('VSCodium') i:exit() end)
+i:bind('', 'b', function() hs.application.launchOrFocus('Obsidian') i:exit() end)
+i:bind('', 't', function() hs.application.launchOrFocus('Telegram Lite') i:exit() end)
 
 -- -- k:bind('', 'I', 'Select app',function()
 -- --   -- Launch applications
@@ -423,34 +428,60 @@ screenMode:bind('cmd', 'j', function()
 end)
 
 screenMode:bind('', '.', function() screenMode:exit()
-				   hs.hints.windowHints()
-				   -- screenMode:exit()
+                   hs.hints.windowHints()
+                   -- screenMode:exit()
 end)
 
 screenMode:bind('', 'i', function() 
-				   hs.grid.pushWindowNextScreen()
-				   -- screenMode:exit()
+                   hs.grid.pushWindowNextScreen()
+                   -- screenMode:exit()
 end)
 
 screenMode:bind('', 'o', function() 
-				   hs.grid.pushWindowPrevScreen()
-				   -- screenMode:exit()
+                   hs.grid.pushWindowPrevScreen()
+                   -- screenMode:exit()
 end)
-	-- { key='i', unit=hs.grid.pushWindowNextSceen()},
-	-- { key='o', unit=hs.grid.pushWindowPrevScreen()},
-	-- { key='.', unit=hs.hints.windowHints},
-	--
+    -- { key='i', unit=hs.grid.pushWindowNextSceen()},
+    -- { key='o', unit=hs.grid.pushWindowPrevScreen()},
+    -- { key='.', unit=hs.hints.windowHints},
+    --
 screenMode:bind('', 'g', function()
-				   hs.grid.show()
-				   screenMode:exit()
+                   hs.grid.show()
+                   -- screenMode:exit()
 end)
-
 
 screenMode:bind('', 't', function()
-				   hs.grid.adjustWidth( 1)
-				   -- screenMode:exit()
+                   hs.grid.adjustWidth( 1)
+                   -- screenMode:exit()
 end)
+
 screenMode:bind('', 'b', function()
-				   hs.grid.adjustWidth(-1)
-				   -- screenMode:exit()
+                   hs.grid.adjustWidth(-1)
+                   -- screenMode:exit()
 end)
+----------------------------
+-- local spaces = require("hs._asm.undocumented.spaces")
+-- -- move current window to the space sp
+-- function MoveWindowToSpace(sp)
+--     local win = hs.window.focusedWindow()      -- current window
+--     local uuid = win:screen():spacesUUID()     -- uuid for current screen
+--     local spaceID = spaces.layout()[uuid][sp]  -- internal index for sp
+--     spaces.moveWindowToSpace(win:id(), spaceID) -- move window to new space
+--     spaces.changeToSpace(spaceID)              -- follow window to new space
+-- end
+-- hs.hotkey.bind(mash, '1', function() MoveWindowToSpace(1) end)
+-----------------------------------
+spaces = require("hs.spaces")
+-- move current window to the space sp
+function MoveWindowToSpace(sp)
+  local win = hs.window.focusedWindow()      -- current window
+  local cur_screen = hs.screen.mainScreen()
+  local cur_screen_id = cur_screen:getUUID()
+  local all_spaces=spaces.allSpaces()
+  local spaceID = all_spaces[cur_screen_id][sp]
+  spaces.moveWindowToSpace(win:id(), spaceID)
+  spaces.gotoSpace(spaceID)              -- follow window to new space
+end
+hs.hotkey.bind(mash, '1', function() MoveWindowToSpace(1) end)
+hs.hotkey.bind(mash, '2', function() MoveWindowToSpace(2) end)
+hs.hotkey.bind(mash, '3', function() MoveWindowToSpace(3) end)

@@ -233,4 +233,12 @@ alias r='d -e ranger' # quick opening files with vim
 alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'
 alias mux='tmuxinator'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-alias mgit='TERM=xterm-24bits emacsclient -c -a "" -nw -e "(progn (magit-status) (delete-other-windows))"'
+# alias mgit='TERM=xterm-24bits emacsclient -c -a "" -nw -e "(progn (magit-status) (delete-other-windows))"'
+alias mgit='TERM=xterm-24bits emacsclient -a "" -nw -e -q "(progn (magit-status))"'
+alias magit1="TERM=xterm-24bits emacsclient --eval '(progn (magit-status) (delete-other-windows))'"
+alias magit2='emacsclient -n -e \(magit-status\)'
+alias magit3='emacsclient -a emacs -e "(magit-status \"$(git rev-parse --show-toplevel)\")"'
+alias magit4='emacsclient -n -e "(magit-status)"'
+alias mgit1='TERM=xterm-24bits emacsclient -c -a "" -nw -n -e "(progn (magit-status) (delete-other-windows))"'
+alias rs='reset'
+alias mgit3='TERM=xterm-24bits emacsclient -t -e "(call-interactively #magit-status)"'

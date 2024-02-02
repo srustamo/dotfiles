@@ -217,5 +217,7 @@
     ],
     "vim.neovimPath": "/usr/local/bin/nvim",
     "git.autofetch": true,
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.accessibilitySupport": "off"
 }

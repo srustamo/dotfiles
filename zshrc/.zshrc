@@ -326,6 +326,7 @@ di() {
     }
 
 # The next line updates PATH for the Google Cloud SDK.
+<<<<<<< Updated upstream
 if [ -f '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.

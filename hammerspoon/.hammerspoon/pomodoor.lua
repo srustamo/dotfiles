@@ -111,6 +111,6 @@ end
 -- pom_update_menu()
 
 -- show menu only on first pom_enable
---hs.hotkey.bind(mash, '9', function() pom_enable() end)
---hs.hotkey.bind(mash, '0', function() pom_disable() end)
+-- hs.hotkey.bind(mash, '9', function() pom_enable() end)
+-- hs.hotkey.bind(mash, '0', function() pom_disable() end)
 

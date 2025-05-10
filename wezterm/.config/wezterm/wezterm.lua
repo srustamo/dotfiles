@@ -39,7 +39,7 @@ end)
 config.font = wezterm.font "PragmataPro Nerd Font"
 config.font_size = 14
 -- -- config.color_scheme = 'Dracula (Official)'
--- -- config.color_scheme = 'Solarized (light) (terminal.sexy)'
+-- config.color_scheme = 'Solarized (light) (terminal.sexy)'
 config.color_scheme = 'Solarized Light (Gogh)'
 config.window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW"
 config.window_decorations = "RESIZE"
@@ -140,16 +140,11 @@ config.colors = {
             -- can also be used for `new_tab_hover`.
         },
     },
+    copy_mode_active_highlight_fg = { AnsiColor = 'Black' },
+    copy_mode_active_highlight_bg = { AnsiColor = 'White' },
+    copy_mode_inactive_highlight_bg = { Color = '#52ad70' },
+    copy_mode_inactive_highlight_fg = { AnsiColor = 'White' },
 }
-
-config.colors = {
-    tab_bar = {
-        -- The color of the inactive tab bar edge/divider
-        inactive_tab_edge = '#575757',
-    },
-}
-
-
 
 config.initial_rows = 50
 config.initial_cols = 200
@@ -157,6 +152,32 @@ config.audible_bell = "Disabled"
 config.send_composed_key_when_left_alt_is_pressed = true
 
 config.term = "xterm-256color"
+
+---
+
+config.mouse_bindings = {
+    -- Right click sends "woot" to the terminal
+    -- Change the default click behavior so that it only selects
+    -- text and doesn't open hyperlinks
+    {
+        event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'NONE',
+        action = act.CompleteSelection 'ClipboardAndPrimarySelection',
+    },
+
+    -- and make CTRL-Click open hyperlinks
+    {
+        event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'CTRL',
+        action = act.OpenLinkAtMouseCursor,
+    },
+    -- NOTE that binding only the 'Up' event can give unexpected behaviors.
+    -- Read more below on the gotcha of binding an 'Up' event only.
+}
+
+
+
+---
 
 local direction_keys = {
     h = "Left",
@@ -228,6 +249,25 @@ config.keys = {
         mods = "LEADER|CTRL",
         action = action.SendKey({ key = "a", mods = "CTRL" }),
     },
+    {
+        key = 'x',
+        mods = 'LEADER',
+        action = wezterm.action.CloseCurrentPane { confirm = false },
+    },
+    {
+        key = ',',
+        mods = 'LEADER',
+        action = act.PromptInputLine {
+            description = wezterm.format({
+                { Text = 'Enter new name for tab: ' }
+            }),
+            action = wezterm.action_callback(function(window, pane, line)
+                if line then
+                    window:active_tab():set_title(line)
+                end
+            end),
+        },
+    },
     split_nav("move", "h"),
     split_nav("move", "j"),
     split_nav("move", "k"),
@@ -266,70 +306,69 @@ config.keys = {
         }),
     },
 }
-
 config.key_tables = {
     -- added new shortcuts to the end
     copy_mode = {
-        { key = "c",        mods = "CTRL", action = act.CopyMode("Close") },
-        { key = "g",        mods = "CTRL", action = act.CopyMode("Close") },
-        { key = "q",        mods = "NONE", action = act.CopyMode("Close") },
-        { key = "Escape",   mods = "NONE", action = act.CopyMode("Close") },
+        { key = "c",          mods = "CTRL",  action = act.CopyMode("Close") },
+        { key = "g",          mods = "CTRL",  action = act.CopyMode("Close") },
+        { key = "q",          mods = "NONE",  action = act.CopyMode("Close") },
+        { key = "Escape",     mods = "NONE",  action = act.CopyMode("Close") },
 
-        { key = "h",        mods = "NONE", action = act.CopyMode("MoveLeft") },
-        { key = "j",        mods = "NONE", action = act.CopyMode("MoveDown") },
-        { key = "k",        mods = "NONE", action = act.CopyMode("MoveUp") },
-        { key = "l",        mods = "NONE", action = act.CopyMode("MoveRight") },
+        { key = "h",          mods = "NONE",  action = act.CopyMode("MoveLeft") },
+        { key = "j",          mods = "NONE",  action = act.CopyMode("MoveDown") },
+        { key = "k",          mods = "NONE",  action = act.CopyMode("MoveUp") },
+        { key = "l",          mods = "NONE",  action = act.CopyMode("MoveRight") },
 
-        { key = "LeftArrow", mods = "NONE", action = act.CopyMode("MoveLeft") },
-        { key = "DownArrow", mods = "NONE", action = act.CopyMode("MoveDown") },
-        { key = "UpArrow",  mods = "NONE", action = act.CopyMode("MoveUp") },
-        { key = "RightArrow", mods = "NONE", action = act.CopyMode("MoveRight") },
+        { key = "LeftArrow",  mods = "NONE",  action = act.CopyMode("MoveLeft") },
+        { key = "DownArrow",  mods = "NONE",  action = act.CopyMode("MoveDown") },
+        { key = "UpArrow",    mods = "NONE",  action = act.CopyMode("MoveUp") },
+        { key = "RightArrow", mods = "NONE",  action = act.CopyMode("MoveRight") },
 
-        { key = "RightArrow", mods = "ALT", action = act.CopyMode("MoveForwardWord") },
-        { key = "f",        mods = "ALT", action = act.CopyMode("MoveForwardWord") },
-        { key = "Tab",      mods = "NONE", action = act.CopyMode("MoveForwardWord") },
-        { key = "w",        mods = "NONE", action = act.CopyMode("MoveForwardWord") },
+        { key = "RightArrow", mods = "ALT",   action = act.CopyMode("MoveForwardWord") },
+        { key = "f",          mods = "ALT",   action = act.CopyMode("MoveForwardWord") },
+        { key = "Tab",        mods = "NONE",  action = act.CopyMode("MoveForwardWord") },
+        { key = "w",          mods = "NONE",  action = act.CopyMode("MoveForwardWord") },
 
-        { key = "LeftArrow", mods = "ALT", action = act.CopyMode("MoveBackwardWord") },
-        { key = "b",        mods = "ALT", action = act.CopyMode("MoveBackwardWord") },
-        { key = "Tab",      mods = "SHIFT", action = act.CopyMode("MoveBackwardWord") },
-        { key = "b",        mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
+        { key = "LeftArrow",  mods = "ALT",   action = act.CopyMode("MoveBackwardWord") },
+        { key = "b",          mods = "ALT",   action = act.CopyMode("MoveBackwardWord") },
+        { key = "Tab",        mods = "SHIFT", action = act.CopyMode("MoveBackwardWord") },
+        { key = "b",          mods = "NONE",  action = act.CopyMode("MoveBackwardWord") },
 
-        { key = "0",        mods = "NONE", action = act.CopyMode("MoveToStartOfLine") },
-        { key = "Enter",    mods = "NONE", action = act.CopyMode("MoveToStartOfNextLine") },
+        { key = "0",          mods = "NONE",  action = act.CopyMode("MoveToStartOfLine") },
+        { key = "Enter",      mods = "NONE",  action = act.CopyMode("MoveToStartOfNextLine") },
 
-        { key = "$",        mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
-        { key = "$",        mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
-        { key = "^",        mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
-        { key = "^",        mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
-        { key = "m",        mods = "ALT", action = act.CopyMode("MoveToStartOfLineContent") },
+        { key = "$",          mods = "NONE",  action = act.CopyMode("MoveToEndOfLineContent") },
+        { key = "$",          mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
+        { key = "^",          mods = "NONE",  action = act.CopyMode("MoveToStartOfLineContent") },
+        { key = "^",          mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
+        { key = "m",          mods = "ALT",   action = act.CopyMode("MoveToStartOfLineContent") },
 
-        { key = " ",        mods = "NONE", action = act.CopyMode { SetSelectionMode = "Cell" } },
-        { key = "v",        mods = "NONE", action = act.CopyMode { SetSelectionMode = "Cell" } },
-        { key = "V",        mods = "NONE", action = act.CopyMode { SetSelectionMode = "Line" } },
-        { key = "V",        mods = "SHIFT", action = act.CopyMode { SetSelectionMode = "Line" } },
-        { key = "v",        mods = "CTRL", action = act.CopyMode { SetSelectionMode = "Block" } },
+        { key = " ",          mods = "NONE",  action = act.CopyMode { SetSelectionMode = "Cell" } },
+        { key = "v",          mods = "NONE",  action = act.CopyMode { SetSelectionMode = "Cell" } },
+        { key = "V",          mods = "NONE",  action = act.CopyMode { SetSelectionMode = "Line" } },
+        { key = "V",          mods = "SHIFT", action = act.CopyMode { SetSelectionMode = "Line" } },
+        { key = "v",          mods = "CTRL",  action = act.CopyMode { SetSelectionMode = "Block" } },
 
-        { key = "G",        mods = "NONE", action = act.CopyMode("MoveToScrollbackBottom") },
-        { key = "G",        mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
-        { key = "g",        mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
+        { key = "G",          mods = "NONE",  action = act.CopyMode("MoveToScrollbackBottom") },
+        { key = "G",          mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
+        { key = "g",          mods = "NONE",  action = act.CopyMode("MoveToScrollbackTop") },
 
-        { key = "H",        mods = "NONE", action = act.CopyMode("MoveToViewportTop") },
-        { key = "H",        mods = "SHIFT", action = act.CopyMode("MoveToViewportTop") },
-        { key = "M",        mods = "NONE", action = act.CopyMode("MoveToViewportMiddle") },
-        { key = "M",        mods = "SHIFT", action = act.CopyMode("MoveToViewportMiddle") },
-        { key = "L",        mods = "NONE", action = act.CopyMode("MoveToViewportBottom") },
-        { key = "L",        mods = "SHIFT", action = act.CopyMode("MoveToViewportBottom") },
+        { key = "H",          mods = "NONE",  action = act.CopyMode("MoveToViewportTop") },
+        { key = "H",          mods = "SHIFT", action = act.CopyMode("MoveToViewportTop") },
+        { key = "M",          mods = "NONE",  action = act.CopyMode("MoveToViewportMiddle") },
+        { key = "M",          mods = "SHIFT", action = act.CopyMode("MoveToViewportMiddle") },
+        { key = "L",          mods = "NONE",  action = act.CopyMode("MoveToViewportBottom") },
+        { key = "L",          mods = "SHIFT", action = act.CopyMode("MoveToViewportBottom") },
 
-        { key = "o",        mods = "NONE", action = act.CopyMode("MoveToSelectionOtherEnd") },
-        { key = "O",        mods = "NONE", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
-        { key = "O",        mods = "SHIFT", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
+        { key = "o",          mods = "NONE",  action = act.CopyMode("MoveToSelectionOtherEnd") },
+        { key = "O",          mods = "NONE",  action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
+        { key = "O",          mods = "SHIFT", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
 
-        { key = "PageUp",   mods = "NONE", action = act.CopyMode("PageUp") },
-        { key = "PageDown", mods = "NONE", action = act.CopyMode("PageDown") },
+        { key = "PageUp",     mods = "NONE",  action = act.CopyMode("PageUp") },
+        { key = "PageDown",   mods = "NONE",  action = act.CopyMode("PageDown") },
 
-        { key = "b",        mods = "CTRL", action = act.CopyMode("PageUp") },
-        { key = "f",        mods = "CTRL", action = act.CopyMode("PageDown") },
+        { key = "b",          mods = "CTRL",  action = act.CopyMode("PageUp") },
+        { key = "f",          mods = "CTRL",  action = act.CopyMode("PageDown") },
 
         -- Enter y to copy and quit the copy mode.
         {
@@ -352,12 +391,12 @@ config.key_tables = {
         { key = "Escape", mods = "NONE", action = act { CopyMode = "Close" } },
         -- Go back to copy mode when pressing enter, so that we can use unmodified keys like "n"
         -- to navigate search results without conflicting with typing into the search area.
-        { key = "Enter", mods = "NONE", action = "ActivateCopyMode" },
-        { key = "c",    mods = "CTRL", action = "ActivateCopyMode" },
-        { key = "n",    mods = "CTRL", action = act { CopyMode = "NextMatch" } },
-        { key = "p",    mods = "CTRL", action = act { CopyMode = "PriorMatch" } },
-        { key = "r",    mods = "CTRL", action = act.CopyMode("CycleMatchType") },
-        { key = "u",    mods = "CTRL", action = act.CopyMode("ClearPattern") },
+        { key = "Enter",  mods = "NONE", action = "ActivateCopyMode" },
+        { key = "c",      mods = "CTRL", action = "ActivateCopyMode" },
+        { key = "n",      mods = "CTRL", action = act { CopyMode = "NextMatch" } },
+        { key = "p",      mods = "CTRL", action = act { CopyMode = "PriorMatch" } },
+        { key = "r",      mods = "CTRL", action = act.CopyMode("CycleMatchType") },
+        { key = "u",      mods = "CTRL", action = act.CopyMode("ClearPattern") },
     }
 }
 

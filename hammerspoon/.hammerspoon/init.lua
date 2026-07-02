@@ -534,13 +534,10 @@ hs.hotkey.bind(mash, '3', function() MoveWindowToSpace(3) end)
 print("=== INIT STARTED ===")
 
 local host = "http://127.0.0.1:8765"
-
 local recording = false
-
 local lastCtrlUp = 0
 local tapWindow = 0.35
-
-local cooldownUntil = 0 -- 🔥 NEW CRITICAL FIX
+local cooldownUntil = 0
 
 local function post(path)
     print("HTTP:", path)
@@ -550,26 +547,100 @@ local function post(path)
 end
 
 --------------------------------------------------
--- START (double Ctrl)
+-- VISUAL INDICATOR
 --------------------------------------------------
-hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+local screenFrame = hs.screen.mainScreen():frame()
+local dotSize = 18
+local margin = 20
+
+local indicator = hs.canvas.new({
+    x = screenFrame.x + screenFrame.w - dotSize - margin,
+    y = screenFrame.y + margin,
+    w = dotSize,
+    h = dotSize
+})
+
+indicator[1] = {
+    type = "circle",
+    action = "fill",
+    fillColor = { red = 1, green = 0, blue = 0, alpha = 0.9 },
+    center = { x = dotSize / 2, y = dotSize / 2 },
+    radius = dotSize / 2
+}
+
+indicator:level(hs.canvas.windowLevels.overlay)
+indicator:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces)
+
+local blinkTimer = nil
+
+local function showIndicator()
+    indicator:show()
+    -- optional blink effect
+    local visible = true
+    blinkTimer = hs.timer.doEvery(0.6, function()
+        visible = not visible
+        indicator:alpha(visible and 1 or 0.2)
+    end)
+end
+
+local function hideIndicator()
+    if blinkTimer then
+        blinkTimer:stop()
+        blinkTimer = nil
+    end
+    indicator:hide()
+end
+
+--------------------------------------------------
+local function startRecording()
+    if not recording then
+        recording = true
+        print(">>> START")
+        post("/start")
+        showIndicator()
+    end
+end
+
+local function stopRecording()
+    if recording then
+        recording = false
+        print(">>> STOP")
+        post("/stop")
+        cooldownUntil = hs.timer.secondsSinceEpoch() + 0.6
+        lastCtrlUp = 0
+        hideIndicator()
+    end
+end
+
+local function isCtrlKey(event)
+    local keyCode = event:getKeyCode()
+    return keyCode == 59 or keyCode == 62 -- left/right control
+end
+
+--------------------------------------------------
+-- TOGGLE (double Ctrl)
+--------------------------------------------------
+local ctrlTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+    if not isCtrlKey(event) then
+        return false
+    end
+
     local flags = event:getFlags()
     local now = hs.timer.secondsSinceEpoch()
 
-    if flags.ctrl then return false end
-
-    -- 🔥 BLOCK EVENTS RIGHT AFTER STOP
     if now < cooldownUntil then
         return false
     end
 
-    print("CTRL RELEASE")
+    if flags.ctrl then
+        return false
+    end
 
-    if (now - lastCtrlUp) < tapWindow then
-        if not recording then
-            recording = true
-            print(">>> START")
-            post("/start")
+    if lastCtrlUp > 0 and (now - lastCtrlUp) < tapWindow then
+        if recording then
+            stopRecording()
+        else
+            startRecording()
         end
         lastCtrlUp = 0
     else
@@ -577,23 +648,26 @@ hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
     end
 
     return false
-end):start()
+end)
+ctrlTap:start()
+
+hs.timer.doEvery(1, function()
+    if not ctrlTap:isEnabled() then
+        print("!!! CTRL TAP WAS DISABLED — RESTARTING !!!")
+        ctrlTap:start()
+    end
+end)
 
 --------------------------------------------------
--- STOP (Q)
+-- STOP (Q) — manual backup
 --------------------------------------------------
 hs.hotkey.bind({}, "q", function()
     print("HOTKEY Q PRESSED, recording =", recording)
+    stopRecording()
 
-    if recording then
-        recording = false
-        print(">>> STOP")
-        post("/stop")
-
-        -- 🔥 CRITICAL: prevent Ctrl ghost trigger
-        cooldownUntil = hs.timer.secondsSinceEpoch() + 0.6
-        lastCtrlUp = 0
-    end
+    hs.timer.doAfter(0.01, function()
+        hs.eventtap.event.newKeyEvent({}, "q", false):post()
+    end)
 end)
 
 hs.alert.show("DICTATION LOADED")

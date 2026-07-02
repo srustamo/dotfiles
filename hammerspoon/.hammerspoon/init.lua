@@ -658,16 +658,5 @@ hs.timer.doEvery(1, function()
     end
 end)
 
---------------------------------------------------
--- STOP (Q) — manual backup
---------------------------------------------------
-hs.hotkey.bind({}, "q", function()
-    print("HOTKEY Q PRESSED, recording =", recording)
-    stopRecording()
-
-    hs.timer.doAfter(0.01, function()
-        hs.eventtap.event.newKeyEvent({}, "q", false):post()
-    end)
-end)
 
 hs.alert.show("DICTATION LOADED")

@@ -426,18 +426,18 @@ function screenMode:exited()
 end
 
 grid = {
-    { key = 'j',   unit = hs.geometry.rect(0, 0.5, 1, 0.5) },
-    { key = 'k',   unit = hs.geometry.rect(0, 0, 1, 0.5) },
-    { key = 'h',   unit = hs.layout.left50 },
-    { key = 'l',   unit = hs.layout.right50 },
+    { key = 'j',     unit = hs.geometry.rect(0, 0.5, 1, 0.5) },
+    { key = 'k',     unit = hs.geometry.rect(0, 0, 1, 0.5) },
+    { key = 'h',     unit = hs.layout.left50 },
+    { key = 'l',     unit = hs.layout.right50 },
     -- { key='r', unit=hs.layout.left30 },
     -- { key='e', unit=hs.layout.right30 },
-    { key = 'r',   unit = hs.geometry.rect(0.3, 0, 0.33, 1) },
+    { key = 'r',     unit = hs.geometry.rect(0.3, 0, 0.33, 1) },
 
-    { key = 'y',   unit = hs.geometry.rect(0, 0, 0.5, 0.5) },
-    { key = 'u',   unit = hs.geometry.rect(0.5, 0, 0.5, 0.5) },
-    { key = 'n',   unit = hs.geometry.rect(0, 0.5, 0.5, 0.5) },
-    { key = 'm',   unit = hs.geometry.rect(0.5, 0.5, 0.5, 0.5) },
+    { key = 'y',     unit = hs.geometry.rect(0, 0, 0.5, 0.5) },
+    { key = 'u',     unit = hs.geometry.rect(0.5, 0, 0.5, 0.5) },
+    { key = 'n',     unit = hs.geometry.rect(0, 0.5, 0.5, 0.5) },
+    { key = 'm',     unit = hs.geometry.rect(0.5, 0.5, 0.5, 0.5) },
 
     { key = 'space', unit = hs.layout.maximized }
 }
@@ -526,3 +526,74 @@ end
 hs.hotkey.bind(mash, '1', function() MoveWindowToSpace(1) end)
 hs.hotkey.bind(mash, '2', function() MoveWindowToSpace(2) end)
 hs.hotkey.bind(mash, '3', function() MoveWindowToSpace(3) end)
+
+-- Whisper
+----------------------------------------------------
+-- Whisper Dictation
+----------------------------------------------------
+print("=== INIT STARTED ===")
+
+local host = "http://127.0.0.1:8765"
+
+local recording = false
+
+local lastCtrlUp = 0
+local tapWindow = 0.35
+
+local cooldownUntil = 0 -- 🔥 NEW CRITICAL FIX
+
+local function post(path)
+    print("HTTP:", path)
+    hs.http.asyncPost(host .. path, "", {}, function(status)
+        print("POST DONE:", path, status)
+    end)
+end
+
+--------------------------------------------------
+-- START (double Ctrl)
+--------------------------------------------------
+hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+    local flags = event:getFlags()
+    local now = hs.timer.secondsSinceEpoch()
+
+    if flags.ctrl then return false end
+
+    -- 🔥 BLOCK EVENTS RIGHT AFTER STOP
+    if now < cooldownUntil then
+        return false
+    end
+
+    print("CTRL RELEASE")
+
+    if (now - lastCtrlUp) < tapWindow then
+        if not recording then
+            recording = true
+            print(">>> START")
+            post("/start")
+        end
+        lastCtrlUp = 0
+    else
+        lastCtrlUp = now
+    end
+
+    return false
+end):start()
+
+--------------------------------------------------
+-- STOP (Q)
+--------------------------------------------------
+hs.hotkey.bind({}, "q", function()
+    print("HOTKEY Q PRESSED, recording =", recording)
+
+    if recording then
+        recording = false
+        print(">>> STOP")
+        post("/stop")
+
+        -- 🔥 CRITICAL: prevent Ctrl ghost trigger
+        cooldownUntil = hs.timer.secondsSinceEpoch() + 0.6
+        lastCtrlUp = 0
+    end
+end)
+
+hs.alert.show("DICTATION LOADED")

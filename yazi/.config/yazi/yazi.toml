@@ -1,0 +1,10 @@
+[manager]
+show_hidden = true
+# sort_by = "size"
+linemode = "size"
+
+[which]
+sort_sensitive = false
+sort_reverse 	 = false
+sort_translit  = false
+

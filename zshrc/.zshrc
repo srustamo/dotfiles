@@ -21,7 +21,8 @@ function lf() {
 #}}}
 
 # alias
-[[ -e ~/.alias ]] && emulate sh -c 'source ~/.alias'
+[[ -r ~/.alias ]] && source ~/.alias
+#[[ -e ~/.alias ]] && emulate sh -c 'source ~/.alias'
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -52,7 +53,14 @@ setopt incappendhistory     # incrementally add items to HISTFILE
 setopt share_history        # share history between sessions ???
 #}}}
 
-eval "$(dircolors -b $HOME/GitHub/LS_COLORS/LS_COLORS)"
+#2026-07-16 GNU dircolors is named gdircolors when installed via Homebrew.
+#eval "$(dircolors -b $HOME/GitHub/LS_COLORS/LS_COLORS)"
+if command -v gdircolors >/dev/null 2>&1; then
+    eval "$(gdircolors -b "$HOME/GitHub/LS_COLORS/LS_COLORS")"
+elif command -v dircolors >/dev/null 2>&1; then
+    eval "$(dircolors -b "$HOME/GitHub/LS_COLORS/LS_COLORS")"
+fi
+
 # LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 # export LS_COLORS
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -123,7 +131,9 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 
 #26_06_2015
 #https://github.com/clvv/fasd
-eval "$(fasd --init auto)"
+# eval "$(fasd --init auto)"
+# 2026-07-16
+eval "$(zoxide init zsh)"
 # alias v='f -e vim' # quick opening files with vim
 #alias m='f -e mplayer' # quick opening files with mplayer
 #alias o='a -e xdg-open' # quick opening files with xdg-open
@@ -205,7 +215,7 @@ autoload -U promptinit && promptinit
 # # turn on git stash status
 zstyle :prompt:pure:git:stash show yes
 
-zstyle :prompt:pure:prompt:success color green 
+zstyle :prompt:pure:prompt:success color green
 
 prompt pure
 
@@ -282,17 +292,17 @@ setopt HIST_IGNORE_ALL_DUPS
 #####zle -N zle-line-init
 #####zle -N zle-keymap-select
 
-# source these at the end recommended 
+# source these at the end recommended
 #{{{zsh-syntax-highlighting
-# https://github.com/zsh-users/zsh-syntax-highlighting#faq 
+# https://github.com/zsh-users/zsh-syntax-highlighting#faq
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/highlighters
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -310,7 +320,7 @@ fi
 #}}}
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-#pushd Sat Jun 19 19:39:06 2021 
+#pushd Sat Jun 19 19:39:06 2021
 #https://zsh.sourceforge.io/Intro/intro_6.html
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
@@ -326,7 +336,6 @@ di() {
     }
 
 # The next line updates PATH for the Google Cloud SDK.
-<<<<<<< Updated upstream
 if [ -f '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/srmbp1/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.

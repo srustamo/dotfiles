@@ -218,21 +218,22 @@ zstyle :prompt:pure:git:stash show yes
 zstyle :prompt:pure:prompt:success color green
 
 prompt pure
+# PROMPT='%n@%m:%~%# '
 
 # https://github.com/sindresorhus/pure/issues/184#issuecomment-173482509
-TRAPWINCH() {
-	    zle && zle .reset-prompt && zle -R
-	}
+# TRAPWINCH() {
+# 	    zle && zle .reset-prompt && zle -R
+# 	}
 #}}}
 
 #{{{ history-substring-search
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
 # source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/dotfiles/zshrc/zsh_plugins/fzf-marks/init.zsh
+    source ~/dotfiles/zshrc/zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    source ~/dotfiles/zshrc/zsh_plugins/fzf-marks/init.zsh
 
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         # POSIX compatibility layer and Linux environment emulation for Windows
@@ -274,8 +275,8 @@ fi
 #}}}
 
 # bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
 
 # export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=
 # export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=
@@ -292,32 +293,6 @@ setopt HIST_IGNORE_ALL_DUPS
 #####zle -N zle-line-init
 #####zle -N zle-keymap-select
 
-# source these at the end recommended
-#{{{zsh-syntax-highlighting
-# https://github.com/zsh-users/zsh-syntax-highlighting#faq
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
-# source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-        # Mac OSX
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/highlighters
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-        # POSIX compatibility layer and Linux environment emulation for Windows
-elif [[ "$OSTYPE" == "msys" ]]; then
-        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-elif [[ "$OSTYPE" == "win32" ]]; then
-        # I'm not sure this can happen.
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-        # ...
-else
-        # Unknown.
-fi
-#}}}
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #pushd Sat Jun 19 19:39:06 2021
@@ -425,3 +400,24 @@ fi
 if [ -f ~/dotfiles/nnn/nnn.zsh ]; then
    source ~/dotfiles/nnn/nnn.zsh
 fi
+
+#2026-07-16 make yazi launch with y key and cd the calling shell to yazi navigated dir
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# zsh-syntax-highlighting must be sourced last
+#{{{ zsh-syntax-highlighting
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/highlighters"
+    source "$HOME/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/highlighters"
+    source "$HOME/dotfiles/zshrc/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+#}}}

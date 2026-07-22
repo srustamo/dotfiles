@@ -23,6 +23,8 @@
 	" call add(g:pathogen_disabled, 'vim-which-key')
 	call add(g:pathogen_disabled, 'vim-xkbswitch')
 	call add(g:pathogen_disabled, 'fzf.vim')
+	call add(g:pathogen_disabled, 'joplin.vim')
+	call add(g:pathogen_disabled, 'vim-colors-solarized')
 	" call add(g:pathogen_disabled, 'lightline.vim')
 " lusty
 " nerdtree
@@ -168,11 +170,90 @@
 	" colorscheme zenburn
 	" colorscheme delek
 	" 28_12_2015
-	call togglebg#map("")
+	" call togglebg#map("")
+
+"Lightline
+set rtp+=~/dotfiles/vim/.vim/bundle/onehalf/vim
+
+	"\	'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], ['percent', 'lineinfo'], ['fileformat'],['indent'] ],
+let g:lightline = {
+	\'colorscheme': 'solarized',
+	\'active': {
+	\	'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', ] ],
+	\	'right': [ ['percent', 'lineinfo'], ['fileformat'], ['indent'] ],
+	\ },
+	\ 'component_function': {
+	\	'gitbranch': 'FugitiveHead',
+	\ 	'indent': 'LightlineIndent',
+	\	'fileformat': 'LightLineFileformat',
+	\	'filename' : 'LightlineFname3',
+	\ },
+	\ 'mode_map': {
+	\ 'n' : 'N',
+	\ 'i' : 'I',
+	\ 'R' : 'R',
+	\ 'v' : 'V',
+	\ 'V' : 'VL',
+	\ "\<C-v>": 'VB',
+	\ 'c' : 'C',
+	\ 's' : 'S',
+	\ 'S' : 'SL',
+	\ "\<C-s>": 'SB',
+	\ 't': 'T',
+	\ },
+	\}
 	" so ~/.vim/colors/vim-colors-solarized/autoload/togglebg.vim
 	" let g:solarized_termtrans = 1
-	colorscheme solarized
+	"
+	"
+
+	"if has('nvim')
+	"	set termguicolors
+	"endif
+
+
+	if has('termguicolors') && ($COLORTERM ==# 'truecolor' || $COLORTERM ==# '24bit')
+		set termguicolors
+	endif
+
 	set background=light
+	colorscheme solarized8
+	" colorscheme solarized8_light
+	"
+"2026-07-22 no reverse attribute. Under the Neovim 0.11 regression, that group can incorrectly inherit StatusLine's reverse	
+	if has('nvim')
+	    highlight StatusLine   guifg=#eee8d5 guibg=#586e75 cterm=NONE gui=NONE
+	    highlight StatusLineNC guifg=#eee8d5 guibg=#839496 cterm=NONE gui=NONE
+	endif
+
+	if has('nvim')
+		highlight! link MsgArea Normal
+	endif
+	
+	" " More visible vim-gitgutter signs
+	" let g:gitgutter_sign_added              = '▌'
+	" let g:gitgutter_sign_modified           = '▌'
+	" let g:gitgutter_sign_removed            = '▌'
+	" let g:gitgutter_sign_removed_first_line = '▌'
+	" let g:gitgutter_sign_modified_removed   = '▌'
+	
+	" highlight GitGutterAdd          ctermfg=2   cterm=bold guifg=#859900 gui=bold
+	" highlight GitGutterChange       ctermfg=3   cterm=bold guifg=#b58900 gui=bold
+	" highlight GitGutterDelete       ctermfg=1   cterm=bold guifg=#dc322f gui=bold
+	" highlight GitGutterChangeDelete ctermfg=5   cterm=bold guifg=#d33682 gui=bold
+
+	" More visible vim-gitgutter signs
+	 let g:gitgutter_sign_added            = '▎'
+	 let g:gitgutter_sign_modified         = '▎'
+	 let g:gitgutter_sign_removed          = '▎'
+	 let g:gitgutter_sign_removed_first_line = '▎'
+	 let g:gitgutter_sign_modified_removed = '▎'
+	 
+	 highlight GitGutterAdd          guifg=#859900 ctermfg=64  gui=bold cterm=bold
+	 highlight GitGutterChange       guifg=#b58900 ctermfg=136 gui=bold cterm=bold
+	 highlight GitGutterDelete       guifg=#dc322f ctermfg=160 gui=bold cterm=bold
+	 highlight GitGutterChangeDelete guifg=#d33682 ctermfg=125 gui=bold cterm=bold
+
 	" 2 Mar 2014 looks this works only in gui Vim; tried this in MacVim, not much
 	"success
 	"set gcr=a:block
@@ -1066,39 +1147,6 @@ let g:fzf_vim_statusline = 0
 "{{{
 "
 set rtp+=~/dotfiles/vim/.vim/bundle/onehalf/vim
-
-let g:lightline = {
-	\ 'colorscheme': 'solarized',
-	\	'active': {
-	\     'left': [ [ 'mode', 'paste' ],
-	\             [ 'gitbranch', 'readonly', 'filename', ] ],
-	\     'right': [
-	\        		[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-	\         	['percent', 'lineinfo'],
-	\         	['fileformat'],
-	\			['indent'] ],
-	\ },
-	\ 'component_function': {
-	\	'gitbranch': 'FugitiveHead',
-	\ 'indent': 'LightlineIndent',
-	\ 'fileformat': 'LightLineFileformat',
-	\	'filename' : 'LightlineFname3',
-	\ },
-	\ 'mode_map': {
-	\ 'n' : 'N',
-	\ 'i' : 'I',
-	\ 'R' : 'R',
-	\ 'v' : 'V',
-	\ 'V' : 'VL',
-	\ "\<C-v>": 'VB',
-	\ 'c' : 'C',
-	\ 's' : 'S',
-	\ 'S' : 'SL',
-	\ "\<C-s>": 'SB',
-	\ 't': 'T',
-	\ },
-	\}
-
 function! LightlineFilename()
 	" return winwidth(0) > 120 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
 	return expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
@@ -1155,10 +1203,13 @@ function! LightLineFileformat()
   return &fileencoding . ' ' . FileFormatIcon()
 endfunction
 
-function! FileFormatIcon()
-  return strlen(&filetype) ? WebDevIconsGetFileFormatSymbol() : 'no ft'
-endfunction
+"function! FileFormatIcon()
+"  return strlen(&filetype) ? WebDevIconsGetFileFormatSymbol() : 'no ft'
+"endfunction
 
+function! FileFormatIcon()
+  return &fileformat
+endfunction
 
 function! LightLineModified()
   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'

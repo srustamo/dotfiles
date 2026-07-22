@@ -142,3 +142,6 @@
 [submodule "nvim/.config/nvim/pack/github/start/copilot.vim"]
 	path = nvim/.config/nvim/pack/github/start/copilot.vim
 	url = git@github.com:github/copilot.vim.git
+[submodule "vim/.vim/bundle/vim-solarized8"]
+	path = vim/.vim/bundle/vim-solarized8
+	url = https://github.com/lifepillar/vim-solarized8.git
